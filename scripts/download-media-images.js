@@ -1,0 +1,223 @@
+import fs from 'fs';
+import path from 'path';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// 获取当前文件的目录路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// 项目根目录
+const rootDir = join(__dirname, '..');
+// 上传目录
+const uploadsDir = join(rootDir, 'public/uploads1');
+
+// 确保上传目录存在
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log(`创建目录: ${uploadsDir}`);
+}
+
+// 从 init-media-library.js 中提取的图片URL列表
+const imageUrls = [
+'/uploads/41dd0befa88f628b0c3c8e5507e6d758.webp',
+'/uploads/548010c013d9dee2eb7315cdc9539bd0.webp',
+'/uploads/a4aaec5cf25312085919bd8c5661b775.webp',
+'/uploads/72cc94b89bc8cef3d9bc413b8cd1a1a4.webp',
+'/uploads/8c08e1c78618a3cd6fa3f22cbf5c720d.webp',
+'/uploads/34c61af47ccc77f762f523ce2041817f.webp',
+'/uploads/3dc72c705e847a647c6fdfdc6ddc6569.webp',
+'/uploads/5370b104fafd06d55a5fa3d80759d1b5.webp',
+'/uploads/fbd0072acb529cce25ce6d3b6319e226.webp',
+'/uploads/f7c0e814e2086e41afd90d02fb996bf5.webp',
+'/uploads/f31291d126a757ef380a2606ddf33505.webp',
+'/uploads/38a564e6c47a2d536997e02a585f7efc.webp',
+'/uploads/400f4b4a8c5baf1486c19a604d6b0513.webp',
+'/uploads/7e0fa40713f523310eac327ab281191b.webp',
+'/uploads/19c8bba5be0325f9e089c5eb2d4aaeca.webp',
+'/uploads/ad6c18d7b5e8ab395eb8482c56041094.webp',
+'/uploads/4c95cce76a25eb821bf22f0a3420d398.webp',
+'/uploads/99cf3c651f0a2e526e9e5f35106ef335.webp',
+'/uploads/4ce26c886f22b44843b45ff9577a64e3.webp',
+'/uploads/b5cfc26d77110b16359cd8a3ae3a1649.webp',
+'/uploads/98c253ce617a8f9979ec90cb5d12f898.webp',
+'/uploads/317a937a4225ae37177c58ddbd3d7142.webp',
+'/uploads/5ec508d72f0914bfe6ef91b8aee454e8.webp',
+'/uploads/ce3a2b56ddb1f1032e55463b478c7987.webp',
+'/uploads/48c4b825543dc18551ed9bcf11dfb4a8.webp',
+'/uploads/c36f03d1042e2180a110302994ba518a.webp',
+'/uploads/53f7d51a06dd05f0235fd2e178c9138e.webp',
+'/uploads/cd911781a1e7871da4d148862e7367da.webp',
+'/uploads/ceb02155c9392b2e6da7ffa8b5f05b1c.webp',
+'/uploads/33354a0051e5189bcb0ba169e3c82d1d.webp',
+'/uploads/edd2d17d47548bae47754e5ca0c7feb0.webp',
+'/uploads/c3bb020d2c7bd4bebbde390618daae10.webp',
+'/uploads/3bc64abc0db9e05c0ff29cca587287f6.webp',
+'/uploads/f7823f28d6b517f43c80cb2d5b4dc03a.webp',
+'/uploads/45f3affa8f9a516a50320e3ca7f41082.webp',
+'/uploads/78c6009a8244d14086529bac02d6b6a7.webp',
+'/uploads/433375485a309ae526a5b85c1485b61f.webp',
+'/uploads/2d03e1f9f407864c36b1b08732b7d9b9.webp',
+'/uploads/d25c145eba25df34691b874eecfa1a32.webp',
+'/uploads/3764b33266a5c4a27d42a995e8954a44.webp',
+'/uploads/be102439a9c700c4ef02aab9971353a5.webp',
+'/uploads/6c8ebdebcee3047d015f1943502f9226.webp',
+'/uploads/a163898adfa2dc5f4737e22dbad02581.webp',
+'/uploads/83ab1f9cce735d1ceded901205d1b00f.webp',
+'/uploads/60db7785b9fa06fd499b7797da55a342.webp',
+'/uploads/ddce2146d9f0391886ff20840d8245d0.webp',
+'/uploads/4a6b32ba030f77bacbd83ee7d8ee87cd.webp',
+'/uploads/655125a219b5e373b3b3f5666b72c659.webp',
+'/uploads/98a49584974b92d8ce0f91fa64f7078d.webp',
+'/uploads/cef91c095c7a8e40174052e626c98d95.webp',
+'/uploads/3d59bf40a6f942ab7d7228c5ebfde3b7.webp',
+'/uploads/451919543466e4634c1f10c212add1b6.webp',
+'/uploads/0a69872ff64dad40b3401e192ae8a265.webp',
+'/uploads/b4602f11c5fba4151c73a10d49f2a14c.webp',
+'/uploads/2ed0550675040e6c2e57456ce5b7d80b.webp',
+'/uploads/ac2bda4ef7e32261ecc0c2cfd85ad80a.webp',
+'/uploads/be687c792533e421dea67516352e13aa.webp',
+'/uploads/8e5e92da81da249c216fcfad8850d6b9.webp',
+'/uploads/2c74e9acce5c26a1489685f88454a0ef.webp',
+'/uploads/57a3c469bdc14196cacd3f00945834e6.webp',
+'/uploads/47af63f20341aebca6a7735a88cda95a.webp',
+'/uploads/35279deabfed5b624514dac715104da5.webp',
+'/uploads/62094d026756189adafad521d0234131.webp',
+'/uploads/613d535690309e07e487aa9140ec9d8a.webp',
+'/uploads/b68cbc8b31390c4a09522024aba533d4.webp',
+'/uploads/0b8b442760615e2e1bfa3bafc69a85ad.webp',
+'/uploads/a3b33d4598ecfddc885d13dbd4d3ad65.webp',
+'/uploads/1876d21d02232c13413034d5c45aef9f.webp',
+'/uploads/cb762bfaddb67ec6f8b010cd466dc603.webp',
+'/uploads/e4d64aaebcd18bd9ac999c1d3f45a96f.webp',
+'/uploads/74052028c55f536621599d4d1adf24bb.webp',
+'/uploads/0d8046737875f826a4669e895c4f9f44.webp',
+'/uploads/d921eb432e914181ff3c8ac1e543f91a.webp',
+'/uploads/ec5cbe9d60643a4644f3ccc32ae462fa.webp',
+'/uploads/5eae98697cde5a34a15c182bbc366fb7.webp',
+'/uploads/67b68a71d86e9f7b8a5a9d2c0938b3a1.webp',
+'/uploads/126faaa06576a66ce244109f44ceed3a.webp',
+'/uploads/b800c536d708988aed54ef111e399623.webp',
+'/uploads/cddc41ccc7ce8567d6e50a0a1618a4ea.webp',
+'/uploads/359494ca740784630d9476bc0465175f.webp',
+'/uploads/0f004a828afcabf3eef86acc333e8c81.webp',
+'/uploads/38bd2945cf1a0cb04c5e5b5859d06e58.webp',
+'/uploads/5811dee28ca054a3caca24643d1578e9.webp',
+'/uploads/7216e0da556059b0c7e4c122786fce04.webp',
+'/uploads/b0fda7fedae726bfef39324e7c22d037.webp',
+'/uploads/6de3b3d63a7b7d57a992b292b91aa56c.webp',
+'/uploads/08b679d766f2295b6c82cfb9a7618a34.webp',
+'/uploads/e2a044fa879285e9dc5c4effa48c4044.webp',
+'/uploads/4f4d04ebfad198517a0002deb41a386f.webp',
+'/uploads/05b778d74968622b872a28136f119602.webp',
+'/uploads/c8eefaf17a9415bff3cecec89cb2a574.webp',
+'/uploads/320b5e9e99c1bc0aa25cbe7985418f0c.webp',
+'/uploads/4efa84f420478505a1ee87e643bd4a7a.webp',
+'/uploads/1fdc76caab31e0e00eb2d712f65685b3.webp',
+'/uploads/9ff30a836b713841e7c119144b75b7ef.webp',
+'/uploads/1c841f6c3261b159667a79ba65a4efb3.webp',
+];
+
+// 基础URL
+const baseUrl = 'https://uptownsrilanka.com'; // 替换为你的服务器地址
+
+// ====== 🧩 新增：延时函数 ======
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 下载单个图片
+async function downloadImage(url, filePath) {
+  try {
+    const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
+    const writer = fs.createWriteStream(filePath);
+    const response = await axios({
+      url: fullUrl,
+      method: 'GET',
+      responseType: 'stream',
+      timeout: 10000, // 10 秒超时
+    });
+    response.data.pipe(writer);
+    return new Promise((resolve, reject) => {
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+    });
+  } catch (error) {
+    console.error(`下载图片失败: ${url}`, error.message);
+    createPlaceholderImage(filePath);
+    throw error; // 让主循环能捕获失败
+  }
+}
+
+// 创建占位图片（如果下载失败）
+function createPlaceholderImage(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  if (ext === '.png' || ext === '.webp') {
+    const buffer = Buffer.from([
+      0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D,
+      0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+      0x08, 0x06, 0x00, 0x00, 0x00, 0x1F, 0x15, 0xC4, 0x89, 0x00, 0x00, 0x00,
+      0x0A, 0x49, 0x44, 0x41, 0x54, 0x78, 0x9C, 0x63, 0x00, 0x01, 0x00, 0x00,
+      0x05, 0x00, 0x01, 0x0D, 0x0A, 0x2D, 0xB4, 0x00, 0x00, 0x00, 0x00, 0x49,
+      0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
+    ]);
+    fs.writeFileSync(filePath, buffer);
+    console.log(`创建占位图片: ${filePath}`);
+  }
+}
+
+// 主函数
+async function downloadAllImages() {
+  console.log('开始下载图片...');
+  let successCount = 0;
+  let failCount = 0;
+  let skipCount = 0;
+  const failedList = [];
+
+  for (const [index, url] of imageUrls.entries()) {
+    const fileName = path.basename(url);
+    const filePath = path.join(uploadsDir, fileName);
+
+    if (fs.existsSync(filePath)) {
+      console.log(`(${index + 1}/${imageUrls.length}) 文件已存在，跳过: ${fileName}`);
+      skipCount++;
+      continue;
+    }
+
+    console.log(`(${index + 1}/${imageUrls.length}) 下载中: ${fileName}`);
+    try {
+      await downloadImage(url, filePath);
+      console.log(`✅ 下载成功: ${fileName}`);
+      successCount++;
+    } catch (error) {
+      console.error(`❌ 下载失败: ${fileName}`);
+      failCount++;
+      failedList.push(url);
+    }
+
+    // === 🧩 新增：间隔下载 ===
+    const delayMs = 800; // 每次下载间隔 0.8 秒，可根据需要调整
+    await sleep(delayMs);
+  }
+
+  // 下载统计
+  console.log('\n=== 下载统计 ===');
+  console.log(`总图片数: ${imageUrls.length}`);
+  console.log(`成功: ${successCount}`);
+  console.log(`失败: ${failCount}`);
+  console.log(`跳过: ${skipCount}`);
+
+  if (failedList.length > 0) {
+    const logFile = join(rootDir, 'failed-downloads.log');
+    fs.writeFileSync(logFile, failedList.join('\n'), 'utf-8');
+    console.log(`❗ 已记录失败图片到 ${logFile}`);
+  }
+
+  console.log('图片下载任务完成 ✅');
+}
+
+// 执行下载
+downloadAllImages().catch(err => {
+  console.error('下载过程中发生错误:', err);
+});

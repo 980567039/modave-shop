@@ -1,0 +1,68 @@
+.accordion-product-wrap {
+    .accordion-product-item {
+        padding: 20px 0;
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--main);
+        }
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &:not(.collapsed) {
+                .btn-open-sub {
+                    &::before {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+        .accordion-content {
+            margin-top: 20px;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+        }
+    }
+    .btn-open-sub {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        &:after,
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--main);
+            transition: 0.4s ease 0.1s;
+            margin: auto;
+        }
+        &::before {
+            width: 2px;
+            height: 18px;
+        }
+        &::after {
+            width: 18px;
+            height: 2px;
+        }
+    }
+    &.style-faqs {
+        .accordion-product-item {
+            &:first-child {
+                padding-top: 0;
+            }
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+        .accordion-faqs-content {
+            padding-top: 8px;
+        }
+    }
+}

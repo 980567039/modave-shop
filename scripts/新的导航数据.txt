@@ -1,0 +1,248 @@
+[
+    {
+        "_id": "68bc327aa0481b172a3b42f8",
+        "title": "Men",
+        "slug": "men",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b42fa",
+        "title": "Women",
+        "slug": "women",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b42fc",
+        "title": "Shoes & Bags",
+        "slug": "shoes-bags",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b42fe",
+        "title": "Brands",
+        "slug": "brands",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4300",
+        "title": "Gift Vouchers",
+        "slug": "gift-vouchers",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4302",
+        "title": "Offers",
+        "slug": "offers",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4304",
+        "title": "Jewellery",
+        "slug": "jewellery",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4306",
+        "title": "New Arrivals",
+        "slug": "new-arrivals",
+        "parentId": ""
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4308",
+        "title": "TShirt",
+        "slug": "tshirt",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b430a",
+        "title": "Casual Shirt",
+        "slug": "casual-shirt",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b430c",
+        "title": "Short",
+        "slug": "short",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b430e",
+        "title": "Sportwear",
+        "slug": "sportwear",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4310",
+        "title": "Tanks",
+        "slug": "tanks",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4312",
+        "title": "Two Pieces",
+        "slug": "two-pieces",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4314",
+        "title": "Denim",
+        "slug": "denim",
+        "parentId": "68bc327aa0481b172a3b42f8"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4316",
+        "title": "Jackets & Hoodies",
+        "slug": "jackets-hoodies",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4318",
+        "title": "Crop Tops",
+        "slug": "crop-tops",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b431a",
+        "title": "Pants & Trousers",
+        "slug": "pants-trousers",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b431c",
+        "title": "Romper",
+        "slug": "romper",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b431e",
+        "title": "Coat & Blazers",
+        "slug": "coat-blazers",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4320",
+        "title": "TShirts",
+        "slug": "tshirts",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4322",
+        "title": "Shorts",
+        "slug": "shorts",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4324",
+        "title": "Jumpsuits",
+        "slug": "jumpsuits",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4326",
+        "title": "Denim",
+        "slug": "denim",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4328",
+        "title": "Footwears",
+        "slug": "footwears",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b432a",
+        "title": "Skirts",
+        "slug": "skirts",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b432c",
+        "title": "Bags",
+        "slug": "bags",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b432e",
+        "title": "Jersey",
+        "slug": "jersey",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4330",
+        "title": "Two Piece",
+        "slug": "two-piece",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4332",
+        "title": "Formal Wear",
+        "slug": "formal-wear",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4334",
+        "title": "Top & Blouse",
+        "slug": "top-blouse",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4336",
+        "title": "Dresses",
+        "slug": "dresses",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4338",
+        "title": "Evening Wears",
+        "slug": "evening-wears",
+        "parentId": "68bc327aa0481b172a3b42fa"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b433a",
+        "title": "Hand Bags",
+        "slug": "hand-bags",
+        "parentId": "68bc327aa0481b172a3b42fc"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b433c",
+        "title": "Backpacks & Laptop Bags",
+        "slug": "backpacks-laptop-bags",
+        "parentId": "68bc327aa0481b172a3b42fc"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b433e",
+        "title": "Women's Shoes",
+        "slug": "womens-shoes",
+        "parentId": "68bc327aa0481b172a3b42fc"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4340",
+        "title": "Tee Love",
+        "slug": "tee-love",
+        "parentId": "68bc327aa0481b172a3b42fe"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4342",
+        "title": "DKDC",
+        "slug": "dkdc",
+        "parentId": "68bc327aa0481b172a3b42fe"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4344",
+        "title": "Uptown",
+        "slug": "uptown",
+        "parentId": "68bc327aa0481b172a3b42fe"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4346",
+        "title": "Reviz",
+        "slug": "reviz",
+        "parentId": "68bc327aa0481b172a3b42fe"
+    },
+    {
+        "_id": "68bc327aa0481b172a3b4348",
+        "title": "PNP",
+        "slug": "pnp",
+        "parentId": "68bc327aa0481b172a3b42fe"
+    }
+]

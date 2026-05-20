@@ -1,0 +1,221 @@
+@use "../abstracts/mixin";
+
+// hover img
+
+.hover-img {
+    .img-style {
+        overflow: hidden;
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-transition: opacity 0.5s ease, transform 2s cubic-bezier(0, 0, 0.44, 1.18);
+            transition: opacity 0.5s ease, transform 2s cubic-bezier(0, 0, 0.44, 1.18);
+        }
+    }
+    &:hover {
+        .img-style{
+            > img {
+                -webkit-transform: scale(1.06);
+                transform: scale(1.06);
+            }
+        }
+        
+    }
+
+    .img-style2 {
+        overflow: hidden;
+        border-radius: 10px;
+        .img-hv {
+            width: 100%;
+            object-fit: cover;
+            -webkit-transition: all 1s cubic-bezier(0.3, 1, 0.35, 1) 0s;
+            transition: all 1s cubic-bezier(0.3, 1, 0.35, 1) 0s;
+            transition: transform 500ms ease;
+        }
+    }
+}
+
+.hover-img2 {
+    .img-style2 {
+        overflow: hidden;
+        border-radius: 8px;
+        .img2 {
+            @include mixin.transition3;
+        }
+    }
+    &:hover {
+        .img2 {
+            transform: scale(1.1) rotate(3deg);
+        }
+    }
+}
+
+.hover-img3 {
+    .img-style3 {
+        border-radius: 8px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            @include mixin.transition3;
+        }
+    }
+    &:hover {
+        img {
+            transform: scale(1.075);
+            @include mixin.transition3;
+        }
+    }
+}
+
+.pagi2 .swiper-pagination2,
+.swiper-button-next2,
+.swiper-button-prev2,
+.hv-one {
+    &:hover {
+        .box-img {
+            .icon-practice {
+                opacity: 1;
+                z-index: 99;
+                top: 50%;
+                transition-delay: 0.5s;
+            }
+        }
+        .img-style {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+    .img-style {
+        border-radius: 10px;
+        overflow: hidden;
+        &::before {
+            content: "";
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            background: #00000080;
+            width: 100%;
+            height: 100%;
+            @include mixin.transition5;
+            z-index: 99;
+            opacity: 0;
+            border-radius: 10px;
+        }
+        &.s-one::before {
+            border-radius: 50%;
+        }
+    }
+}
+
+.hv-one2 {
+    &:hover {
+        .img-style2 {
+            &::before {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    .img-style2 {
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-transition: all 0.4s ease-out 0s;
+            -moz-transition: all 0.4s ease-out 0s;
+            -ms-transition: all 0.4s ease-out 0s;
+            -o-transition: all 0.4s ease-out 0s;
+            transition: all 0.4s ease-out 0s;
+            opacity: 0;
+            visibility: hidden;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            border-radius: 10px;
+        }
+    }
+}
+
+// hv tool
+.hv-tool {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hover-tooltip {
+    position: relative;
+    .tooltip {
+        position: absolute;
+        white-space: nowrap;
+        padding: 0px 8.5px;
+        height: 25px;
+        border-radius: 2px;
+        bottom: calc(100% + 7px);
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        visibility: hidden;
+        color: var(--white); 
+        max-width: 250px;
+        width: max-content;
+        background-color: var(--main);
+        transition:
+        transform 0.4s ease 0.2s,opacity 0.4s ease 0.2s;
+        z-index: 5;
+        font-size: 12px;
+        line-height: 22px;
+        &::before {
+            content: "";
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            top: 20px;
+            position: absolute;
+            background: var(--main);
+            width: 8px;
+            height: 8px;
+            z-index: -1;
+        }
+    }
+    &:hover {
+        .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &.tooltip-bot {
+        .tooltip {
+            top: calc(100% + 5px);
+            bottom: unset;
+            &::before {
+                top: -2px;
+            }
+        }
+    }
+}
+.hover-overlay {
+   position: relative;
+   &::before{
+        position: absolute;
+        z-index: 2;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        transition: 0.4s ease 0.1s;
+        opacity: 0;
+        visibility: hidden; 
+   }
+   &:hover::before{
+        opacity: 1;
+        visibility: visible;
+   }
+}

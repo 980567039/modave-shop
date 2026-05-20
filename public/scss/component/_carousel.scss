@@ -1,0 +1,177 @@
+@use "../abstracts/mixin";
+
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0px;
+}
+
+.sw-auto {
+    .swiper-wrapper{
+        align-items: center;
+    }
+    .swiper-slide {
+        width: auto;
+        transition-timing-function: linear;
+    }
+   
+}
+
+.sw-dots {
+    display: flex;
+    gap: 8px;
+    &.type-circle {
+        .swiper-pagination-bullet {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+            border: 1px solid transparent;
+            opacity: 1;
+            &::after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                content: '';
+                width: 8px;
+                height: 8px;
+                background-color:  transparent;
+                border-radius: 50%;
+                border: 1px solid var(--main);
+                opacity: 1;
+            }
+            &.swiper-pagination-bullet-active {
+                border: 1px solid var(--main);
+                &::after {
+                    background-color: var(--main);
+                }
+            }
+        }
+    }
+    &.white-circle{
+        .swiper-pagination-bullet{
+            &::after{
+                background-color: var(--white);
+                border-color: var(--white);
+            }
+            &.swiper-pagination-bullet-active {
+                border: 1px solid var(--white);
+                &::after{
+                    background-color: var(--white);
+                }
+            }
+        }
+    }
+    &.white-circle-line{
+        .swiper-pagination-bullet{
+            &::after{
+                border-color: var(--white);
+            }
+            &.swiper-pagination-bullet-active {
+                border: 1px solid var(--white);
+                &::after{
+                    background-color: var(--white);
+                }
+            }
+        }
+    }
+    // ------------------
+    &.type-square{
+        .swiper-pagination-bullet{
+            @include mixin.transition3;
+            width: 24px;
+            height: 4px;
+            border-radius: 99px;
+            background-color: var(--main);
+            opacity: 0.3;
+            &.swiper-pagination-bullet-active {
+                width: 40px;
+                opacity: 1;
+            }
+        }
+    }
+    &.white-square{
+        .swiper-pagination-bullet{
+            background-color: var(--white);
+        }
+    }
+    &:not(.swiper-pagination-lock) {
+        margin-top: 20px;
+    }
+    
+}
+.nav-sw{
+    background-color: var(--white);
+    border-radius: 999px;
+    @include mixin.transition3;
+    @include mixin.flex(center, center);
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--secondary);
+    color: var(--main);
+    cursor: pointer;
+    .icon{
+        font-size: 18px;
+    }
+    &:hover{
+        background-color: var(--main);
+        border-color: var(--main);
+        color: var(--white);
+    }
+    &.lg{
+        width: 40px;
+        height: 40px;
+        border-color: transparent;
+        .icon{
+            font-size: 20px;
+        }
+    }
+    &.swiper-button-disabled{
+        background-color: rgba(0, 0, 0, 0.2);
+        color: var(--main);
+        border-color: transparent;
+        cursor: text;
+    }
+    
+}
+
+.slider-auto-vertical {
+    .swiper-slide {
+        height: max-content !important;
+    }
+}
+
+.layout-sw-center{
+    overflow: hidden;
+    
+}
+.swiper{
+    .sec-btn {
+        margin-top: 20px;
+    }
+}
+.flat-sw-navigation{
+    position: relative;
+    .nav-sw{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        &.nav-sw-left{
+            left: 20px;
+        }
+        &.nav-sw-right{
+            right: 20px;
+        }
+    }
+}
+.flat-sw-pagination{
+    position: relative;
+    .sw-dots{
+        position: absolute;
+        margin-top: 0;
+        z-index: 10;
+        bottom: 20px;
+    }
+}

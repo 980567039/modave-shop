@@ -1,0 +1,408 @@
+@use "../abstracts/mixin";
+@use "../abstracts/variable";
+
+.tf-pin-btn {
+    cursor: pointer;
+    @include mixin.transition3;
+    position: relative;
+    span {
+        display: block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 8px solid var(--white);
+        @include mixin.transition3;
+        &::after,
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border: solid 1px var(--white);
+            border-radius: 50%;
+        }
+        &::before {
+            animation: ripple-line 2s linear infinite;
+        }
+        &::after {
+            animation: ripple-line 2s 1s linear infinite;
+        }
+    }
+    &.style-lg {
+        span {
+            width: 28px;
+            height: 28px;
+        }
+    }
+    &.style-hover {
+        &:hover {
+            span {
+                background-color: var(--primary);
+            }
+        }
+    }
+    &.style-dark {
+        width: 28px;
+        height: 28px;
+        background-color: var(--white);
+        @include mixin.flex(center, center);
+        border-radius: 50%;
+        span {
+            background-color: var(--main);
+            width: 12px;
+            height: 12px;
+            border: 0;
+            @include mixin.transition3;
+        }
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+
+            span {
+                background-color: var(--primary);
+            }
+        }
+    }
+}
+
+.collection-position-3 {
+    position: relative;
+}
+
+.cls-lookbook {
+    overflow: unset;
+    position: relative;
+    .img-style {
+        border-radius: 20px;
+        display: block;
+    }
+    .lookbook-item {
+        position: absolute;
+        left: 30%;
+        bottom: 32%;
+        &.position1 {
+            left: 40%;
+            bottom: 12%;
+        }
+        &.position2 {
+            left: 32%;
+            bottom: 18%;
+        }
+        &.position3 {
+            left: 58%;
+            bottom: 10%;
+        }
+        &.position4 {
+            left: 36%;
+            bottom: 45%;
+        }
+        &.position5 {
+            left: 70%;
+            bottom: 16%;
+        }
+    }
+}
+.tf-sw-lookbook {
+    .cls-lookbook {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.lookbook-item {
+    .dropdown-menu {
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+    }
+}
+.loobook-product {
+    box-shadow: var(--shadow1);
+    padding: 12px;
+    background-color: var(--white);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    .content {
+        text-align: start;
+        .btn-lookbook {
+            margin-top: 5px;
+        }
+    }
+    .img-style {
+        border-radius: 0;
+        flex-shrink: 0;
+    }
+    .btn-lookbook {
+        font-size: 12px;
+        line-height: 20px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        &::after {
+            height: 1px;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        border-width: 8px;
+        border-style: solid;
+    }
+    &.style-row {
+        flex-direction: row;
+        .img-style {
+            max-width: 60px;
+            max-height: 100px;
+        }
+    }
+}
+.dropup {
+    .loobook-product {
+        margin-bottom: 20px;
+        &::before {
+            border-color: var(--white) transparent transparent transparent;
+            bottom: -4%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.lookbook-item {
+    .dropend {
+        .dropdown-menu {
+            --bs-dropdown-min-width: 12rem;
+            margin-left: 15px !important;
+        }
+        .loobook-product {
+            margin: -50px 0px;
+            &::before {
+                border-color: transparent #fff transparent transparent;
+                top: 50%;
+                left: -15px;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
+
+.sw-lookbook-wrap {
+    padding-top: 70px;
+    margin-top: -70px;
+}
+
+// banner-lookbook
+.banner-lookbook {
+    position: relative;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .lookbook-item {
+        position: absolute;
+        left: 52%;
+        bottom: 32%;
+        &.position1 {
+            left: 49%;
+            bottom: 10%;
+        }
+        &.position2 {
+            left: 12%;
+            bottom: 35%;
+        }
+        &.position3 {
+            left: 49%;
+            bottom: 52%;
+        }
+        &.position4 {
+            left: 70%;
+            bottom: 35%;
+        }
+        &.position5 {
+            left: 37.7%;
+            bottom: 65.5%;
+        }
+    }
+}
+.dropdown-custom {
+    .dropdown-menu {
+        --bs-dropdown-min-width: 13rem;
+    }
+}
+.flat-with-text-lookbook {
+    align-items: center;
+    .banner-img {
+        position: relative;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tf-pin-btn {
+            position: absolute;
+            &.pin-1 {
+                top: 40%;
+                left: 43%;
+            }
+            &.pin-2 {
+                top: 85%;
+                left: 43%;
+            }
+        }
+    }
+    .lookbook-content {
+        .box-title {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .swiper {
+            width: 100%;
+        }
+        .total-lb {
+            margin-top: 20px;
+        }
+    }
+}
+
+.flat-with-text-lookbook-v2 {
+    .banner-img {
+        position: relative;
+        width: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tf-pin-btn {
+            position: absolute;
+            &.pin-1 {
+                top: 42%;
+                left: 25%;
+            }
+            &.pin-2 {
+                top: 30%;
+                left: 44%;
+            }
+            &.pin-3 {
+                top: 62%;
+                left: 80%;
+            }
+        }
+    }
+    .lookbook-content {
+        padding: 0px 15px 40px;
+        width: 100%;
+        .box-title {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .swiper {
+            width: 100%;
+        }
+        .total-lb {
+            margin-top: 20px;
+        }
+    }
+}
+.icv__circle {
+    width: 56px;
+    height: 36px;
+    background-color: var(--white);
+    border: 1px solid var(--main) !important;
+    border-radius: 1000px;
+}
+.icv__arrow-wrapper {
+    position: relative;
+    &:first-child {
+        &::before {
+            position: absolute;
+            font-family: variable.$fontIcon;
+            content: "\e933";
+            left: -2px;
+            color: var(--main);
+            font-size: 20px;
+        }
+    }
+    &:last-child {
+        &::before {
+            position: absolute;
+            font-family: variable.$fontIcon;
+            content: "\e934";
+            right: -2px;
+            color: var(--main);
+            font-size: 20px;
+        }
+    }
+    svg {
+        display: none;
+        width: 15px !important;
+        height: 15px !important;
+        path {
+            stroke: var(--main);
+        }
+    }
+}
+.icv__label {
+    bottom: auto;
+    top: 1rem;
+    font-size: 12px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 10px 24px;
+    border-radius: 30px;
+    background-color: var(--main);
+}
+
+@keyframes ripple-line {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.wrap-lookbook-hover {
+    .bundle-pin-item {
+        cursor: pointer;
+    }
+    .bundle-hover-item {
+        @include mixin.transition3();
+        &.no-hover {
+            opacity: 0.3;
+        }
+        &.card-product {
+            .title {
+                width: max-content;
+                display: inline;
+                background-repeat: no-repeat;
+                background-position-y: 0px;
+                background-image: linear-gradient(
+                    transparent calc(100% - 1px),
+                    currentColor 1px
+                );
+                transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+                background-size: 0 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+        }
+    }
+    .has-hover {
+        .card-product:not(.no-hover) {
+            .title {
+                background-size: 100% 100%;
+                transition-delay: 0.2s;
+            }
+        }
+    }
+}

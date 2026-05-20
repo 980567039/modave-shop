@@ -1,0 +1,115 @@
+.range-slider {
+  height: 4px !important;
+
+  .range-slider__range {
+    background: var(--main) !important;
+  }
+  .range-slider__thumb {
+    background: var(--white) !important;
+    border: 2px solid var(--main);
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+#shoppingCart.show .tf-progress-bar .value {
+  width: 60% !important;
+}
+.menu-item-li.active {
+  .menu-link-text {
+    color: var(--primary) !important;
+    &::before {
+      width: 100%;
+      left: 0;
+      right: auto;
+      background-color: var(--primary) !important;
+    }
+  }
+}
+.sub-nav-link.active,
+.mb-menu-link.active,
+.sub-nav-link.active {
+  color: var(--primary) !important;
+}
+@media only screen and (max-width: 767px) {
+  .footer .footer-col-block .tf-collapse-content {
+    overflow-y: hidden;
+    display: block;
+    height: 0px;
+    transition: 0.5s;
+  }
+}
+.tfSubscribeMsg {
+  display: none;
+  max-height: 0px;
+  // transition: 0.4s;
+  overflow: hidden;
+  &.active {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-height: 180px;
+    display: block;
+  }
+}
+.swiper-pagination-lock {
+  display: none;
+}
+.show-mx-1200 {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .show-mx-1200 {
+    display: block !important;
+  }
+  .hidden-mx-1200 {
+    display: none;
+  }
+}
+.tf-toolbar-bottom {
+  overflow-x: hidden;
+}
+.mw-100p-scroll {
+  max-width: 100%;
+  overflow-y: auto;
+}
+.mw-100p-hidden,
+.tf-product-info-wrap {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.tabFilter {
+  transform: translateY(30px) !important;
+  opacity: 0 !important;
+  transition: 0.3s !important;
+  &.filtered {
+    transform: translateY(0px) !important;
+    opacity: 1 !important;
+  }
+}
+.icv__label {
+  height: fit-content !important;
+}
+.home-gaming-testimonials {
+  @media (max-width: 1200px) {
+    .nav-prev-testimonial {
+      left: 300px !important;
+      bottom: 0;
+      top: unset;
+    }
+    .nav-next-testimonial {
+      right: 300px !important;
+      bottom: 0;
+      top: unset;
+    }
+  }
+}
+
+.bookstore-product-heading {
+  @media (max-width: 580px) {
+    flex-wrap: wrap;
+    .btn-line {
+      margin-top: 20px;
+    }
+  }
+}

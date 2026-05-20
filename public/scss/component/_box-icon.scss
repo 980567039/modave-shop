@@ -1,0 +1,183 @@
+@use "../abstracts/mixin";
+
+.box-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mixin.transition3;
+    cursor: pointer;
+}
+
+.tf-social-icon {
+    --facebook-cl: rgb(59, 89, 152);
+    --twitter-cl: rgb(85, 85, 85);
+    --instagram-cl: linear-gradient(#8a3ab9, #e95950, #fccc63);
+    --threads-cl: rgb(224, 53, 102);
+    --youtube-cl: rgb(205, 32, 31);
+    --tiktok-cl: linear-gradient(#25f4ee, #000, #fe2c55);
+    --tiktok-cl2: rgb(254, 44, 85);
+    --pinterest-cl: rgb(203, 32, 39);
+    --tumblr-cl: rgb(55, 69, 92);
+    --vimeo-cl: rgb(26, 183, 234);
+    --snapchat-cl: rgb(255, 221, 0);
+    --whatsapp-cl: rgb(0, 230, 118);
+    --linked_in-cl: rgb(23, 106, 255);
+    --wechat-cl: rgb(26, 173, 24);
+    --reddit-cl: rgb(255, 69, 0);
+    --line-cl: rgb(0, 195, 77);
+    --spotify-cl: rgb(30, 125, 96);
+    .social-facebook:hover {
+        background: var(--facebook-cl);
+        color: var(--white);
+        border: none;
+    }
+    .social-twiter:hover {
+        background: var(--twitter-cl);
+        color: var(--white);
+        border: none;
+    }
+    .social-instagram:hover {
+        background: var(--instagram-cl);
+        color: var(--white);
+        border: none;
+    }
+    .social-tiktok:hover {
+        background: var(--tiktok-cl);
+        color: var(--white);
+        border: none;
+    }
+    .social-pinterest:hover {
+        background: var(--pinterest-cl);
+        color: var(--white);
+        border: none;
+    }
+    .social-amazon:hover {
+        background: var(--main);
+        color: var(--white);
+        border: none;
+    }
+    .social-youtube:hover {
+        background: var(--youtube-cl);
+        color: var(--white);
+        border: none;
+    }
+
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        color: var(--main);
+        border: 1px solid var(--main);
+        border-radius: 50%;
+    }
+    &.style-white {
+        a {
+            color: var(--white);
+            border-color: var(--white);
+        }
+    }
+    &.style-fill {
+        a {
+            background-color: var(--line);
+            width: 32px;
+            height: 32px;
+            border: none;
+        }
+    }
+    &.style-fill-2 {
+        a {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
+            border: 1px solid #ffffff1a;
+            &:hover {
+                border-color: transparent;
+            }
+        }
+    }
+    &.style-1 {
+        a {
+            background-color: var(--surface);
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            border-color: transparent;
+        }
+    }
+    &.style-2 {
+        a {
+            width: 40px;
+            height: 40px;
+            border: 0;
+            color: var(--main);
+            background-color: var(--white);
+            font-size: 18px;
+        }
+    }
+    &.style-default {
+        gap: 8px;
+        a {
+            border: 0;
+            font-size: 15px;
+        }
+    }
+    &.style-small {
+        a {
+            width: 32px;
+            height: 32px;
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.tf-icon-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    .icon-box {
+        font-size: 40px;
+    }
+    .content {
+        display: grid;
+        gap: 8px;
+    }
+    &.style-2 {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 12px;
+        .icon-box {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            @include mixin.flex(center, center);
+        }
+        &.type-column {
+            flex-direction: column;
+            gap: 22px;
+        }
+        
+    }
+    &.style-3 {
+        padding-right: 20px;
+        gap: 12px;
+        .icon-box {
+            padding: 12px;
+        }
+    }
+}
+.slider-icon-box {
+    padding: 30px;
+    border-radius: 16px;
+}

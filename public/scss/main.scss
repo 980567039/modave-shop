@@ -1,0 +1,10 @@
+@use "sass:meta";
+// Fonts
+@import "/fonts/fonts.css";
+@import "/fonts/font-icons.css";
+
+// CSS
+@import "/css/bootstrap.min.css";
+@import "/css/swiper-bundle.min.css";
+@import "/css/animate.css";
+@include meta.load-css("app.scss");

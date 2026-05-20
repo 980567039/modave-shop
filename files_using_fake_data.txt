@@ -1,0 +1,65 @@
+# 硬编码 / 假数据清理清单
+
+更新时间：2026-05-19
+
+## 已处理
+
+- `app/newSite-components/modals/SearchModal.jsx`
+  - 原来依赖 `app/newSite-data/products` 的 `productMain`
+  - 现在改为请求 `/api/site/product?search=...` 获取真实商品建议
+
+- `app/newSite-components/headers/Nav.jsx`
+- `app/newSite-components/modals/MobileMenu.jsx`
+  - 原来 Categories 是固定占位链接
+  - 现在通过 `useStorefrontNavigation` 请求 `/api/site/categories` 显示真实分类
+
+- `app/newSite-components/footers/Footer1.jsx`
+  - 原来品牌名、邮箱、电话、地址、社交链接和页脚菜单都以模板静态数据为主
+  - 现在优先读取 `/api/site/common` 中的 `StoreTheme.footer` 和 `storeData`
+  - 模板静态 footer 数据只作为接口失败或后台未配置时的兜底
+
+- `app/newSite-components/modals/CartModal.jsx`
+- `app/newSite-components/modals/QuickAdd.jsx`
+- `app/newSite-components/modals/Wishlist.jsx`
+- `app/newSite-components/modals/Compare.jsx`
+  - 原来弹窗会依赖 `app/newSite-data/products` 的静态商品集合
+  - 现在正式商品卡片会把真实商品对象写入 quick add / wishlist / compare 上下文
+  - 这些弹窗优先渲染上下文里的真实商品对象
+
+- `app/newSite-components/modals/Categories.jsx`
+  - 原来是模板静态分类图片和文案
+  - 现在请求 `/api/site/categories` 渲染真实分类，并链接到 `/shop-default-grid?category=<slug>`
+
+- `app/newSite-components/productDetails/Breadcumb.jsx`
+- `app/newSite-components/productDetails/ProductStikyBottom.jsx`
+- `app/newSite-components/productDetails/RelatedProducts.jsx`
+- `app/newSite-components/productDetails/descriptions/Description.jsx`
+- `app/newSite-components/productDetails/details/Details1.jsx`
+  - 正式商品详情页已移除静态商品集合依赖、固定假商品、固定 SKU/分类/描述等信息
+  - 相关商品现在通过 `/api/site/product` 读取真实商品
+  - 底部粘性加购条现在使用当前详情页商品
+
+## 正式前台仍需优先清理
+
+- `app/newSite-components/productDetails/**`
+  - 当前正式详情页主链路已优先处理
+  - 仍有支付图标、配送/退货文案、评论、组合商品、颜色图等模板演示数据
+  - 后续应接入后台主题配置、商品扩展字段或直接隐藏未配置区块
+
+- `templates/modave/AboutPage.jsx`
+  - 仍导入 `brands`、`features` 等静态模板数据
+  - 建议后续由页面内容配置或主题配置提供
+
+## 低优先级 / 归档素材
+
+- `app/newSite-components/homes/**`
+  - 多数是模板 demo 首页素材
+  - 当前不作为正式生产路由，除非未来恢复为可选模板，否则不优先清理
+
+- `templates/modave/examples/**`
+  - 归档 demo 页面
+  - 不参与正式导航和主链路，保留为模板参考
+
+- `app/newSite-data/*.js`
+  - 模板原始静态数据集合
+  - 后续目标是只保留模板示例所需数据；正式前台应逐步改用 API 或主题配置

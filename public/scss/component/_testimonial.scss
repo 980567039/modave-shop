@@ -1,0 +1,200 @@
+@use "../abstracts/mixin";
+
+.testimonial-item {
+    display: flex;
+    border: 1px solid var(--line);
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    .img-style {
+        max-width: 234px;
+        width: 100%;
+        position: relative;
+        flex-shrink: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .box-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            background-color: var(--white);
+            @include mixin.flex(center, center);
+            color: var(--main);
+            font-size: 18px;
+            border-radius: 50%;
+            z-index: 5;
+            &:hover {
+                background-color: var(--main);
+                color: var(--white);
+            }
+        }
+        &::before {
+            position: absolute;
+            z-index: 2;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            transition: 0.4s ease 0.1s;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    .content {
+        padding: 26px;
+    }
+    .content-top {
+        display: grid;
+        gap: 8px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+    }
+    .box-author {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .box-avt {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        img {
+            transform: none;
+        }
+    }
+    .box-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--main);
+        color: var(--white);
+        .icon {
+            font-size: 16px;
+        }
+    }
+    .box-rate-author {
+        margin-top: 8px;
+        display: grid;
+        gap: 4px;
+    }
+    &.style-2 {
+        padding: 24px;
+        display: block;
+        .content-top {
+            padding-bottom: 16px;
+        }
+    }
+    &.style-3 {
+        border: none;
+        border-radius: 12px;
+    }
+    &.style-4 {
+        border-radius: 12px;
+        padding: 32px;
+        display: block;
+        border: 2px solid var(--line);
+        @include mixin.transition3();
+        .content-top {
+            padding-bottom: 0px;
+            border: 0;
+        }
+        &:hover {
+            border-color: var(--main);
+        }
+    }
+    &.style-row {
+        flex-direction: column;
+        .img-style {
+            max-width: 100%;
+            height: 273px;
+        }
+    }
+    &.no-border {
+        border: 0;
+    }
+    &:hover {
+        .img-style {
+            &::before {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}
+.testimonial-item-v2 {
+    display: grid;
+    gap: 16px;
+    .quote-box {
+        display: grid;
+        gap: 16px;
+        .icon {
+            font-size: 40px;
+        }
+    }
+    .tes-box {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: start;
+        gap: 8px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+    }
+    .rate-box {
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        gap: 8px;
+        .list-star-default {
+            justify-content: center;
+            gap: 4px;
+            .icon {
+                font-size: 22px;
+                color: var(--primary);
+            }
+        }
+    }
+}
+
+.tf-sw-testimonial {
+    .box-navigation {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+}
+.testimonial-item-2 {
+    display: grid;
+    gap: 20px;
+    .content-top {
+        display: grid;
+        gap: 12px;
+    }
+    .box-author {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .info {
+            display: grid;
+            gap: 4px;
+        }
+        .avt {
+            max-width: 68px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+}
