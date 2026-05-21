@@ -2,6 +2,10 @@
 
 A Next.js storefront using the Modave template with a single maintained homepage variant: `home-1`.
 
+## Demo
+
+[View live demo](https://nuvie-backup-main1.vercel.app/)
+
 ## Scripts
 
 ```bash
