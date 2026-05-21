@@ -1,8 +1,8 @@
 import { SiteProvider } from "@/app/contexts/siteContexts";
 import PaymentConfirm from "@/app/components/theme/checkout/paymentConfirm";
-import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
 
 export default function ModaveOrderConfirmPage() {
   return (

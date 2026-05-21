@@ -21,7 +21,6 @@ export default function QuickView() {
     cartProducts,
     updateQuantity,
   } = useContextElement();
-  console.log(quickViewItem)
   const openModalSizeChoice = () => {
     const bootstrap = require("bootstrap"); // dynamically import bootstrap
     var myModal = new bootstrap.Modal(document.getElementById("size-guide"), {

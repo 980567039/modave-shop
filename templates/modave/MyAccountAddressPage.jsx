@@ -1,4 +1,4 @@
-import Address from "@/app/newSite-components/my-account/Address";
+import { Address } from "@/templates/modave/components/account";
 import MyAccountShell from "@/templates/modave/MyAccountShell";
 
 export default function ModaveMyAccountAddressPage() {

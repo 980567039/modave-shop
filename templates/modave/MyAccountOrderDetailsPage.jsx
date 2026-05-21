@@ -1,4 +1,4 @@
-import OrderDetails from "@/app/newSite-components/my-account/OrderDetails";
+import { OrderDetails } from "@/templates/modave/components/account";
 import MyAccountShell from "@/templates/modave/MyAccountShell";
 
 export default function ModaveMyAccountOrderDetailsPage() {

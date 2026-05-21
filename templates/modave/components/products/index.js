@@ -1,0 +1,16 @@
+export { default as Products1 } from "@/app/newSite-components/products/Products1";
+export { default as SearchProducts } from "@/app/newSite-components/products/SearchProducts";
+export { default as BannerTabProduct } from "@/app/newSite-components/productCards/BannerTabProduct";
+export { default as ProductCard1 } from "@/app/newSite-components/productCards/ProductCard1";
+export { default as ProductCard2 } from "@/app/newSite-components/productCards/ProductCard2";
+export { default as ProductCard3 } from "@/app/newSite-components/productCards/ProductCard3";
+export { default as ProductCard4 } from "@/app/newSite-components/productCards/ProductCard4";
+export { default as ProductCard5 } from "@/app/newSite-components/productCards/ProductCard5";
+export { default as ProductCard7 } from "@/app/newSite-components/productCards/ProductCard7";
+export { default as ProductCard8 } from "@/app/newSite-components/productCards/ProductCard8";
+export { default as ProductCard9 } from "@/app/newSite-components/productCards/ProductCard9";
+export { default as ProductCard10 } from "@/app/newSite-components/productCards/ProductCard10";
+export { default as ProductCard11 } from "@/app/newSite-components/productCards/ProductCard11";
+export { default as ProductCard12 } from "@/app/newSite-components/productCards/ProductCard12";
+export { default as ProductCard13 } from "@/app/newSite-components/productCards/ProductCard13";
+export { default as ProductsCards6 } from "@/app/newSite-components/productCards/ProductsCards6";

@@ -31,7 +31,7 @@ const CountdownTimer = ({ style = 1, targetDate = "2025-06-31T23:59:59" }) => {
   }, [targetDate]);
 
   if (!timeLeft) {
-    return <div>Time's up!</div>;
+    return <div>Time&apos;s up!</div>;
   }
 
   return (

@@ -509,7 +509,7 @@ export default function Faqs() {
             <div className="ask-question-wrap">
               <h5 className="mb_4">Ask Your Question</h5>
               <p className="mb_20 text-secondary">
-                Ask Anything, We're Here to Help
+                Ask Anything, We&apos;re Here to Help
               </p>
               <form
                 className="form-leave-comment"

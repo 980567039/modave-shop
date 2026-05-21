@@ -11,7 +11,7 @@ export default function OrderTrac() {
               <h4 className="mb_8">Order Tracking</h4>
               <p>
                 To track your order please enter your Order ID in the box below
-                and press the "Track" button. This was given to you on your
+                and press the &quot;Track&quot; button. This was given to you on your
                 receipt and in the confirmation email you should have received.
               </p>
             </div>
@@ -35,7 +35,7 @@ export default function OrderTrac() {
             <h4 className="mb_8">Already have an account?</h4>
             <p className="text-secondary">
               Welcome back. Sign in to access your personalized experience,
-              saved preferences, and more. We're thrilled to have you with us
+              saved preferences, and more. We&apos;re thrilled to have you with us
               again!
             </p>
             <Link href={`/login`} className="tf-btn btn-fill">

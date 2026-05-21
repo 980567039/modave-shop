@@ -36,8 +36,8 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0", products = [
         <div className="heading-section text-center wow fadeInUp">
           <h3 className="heading">On Tiktok</h3>
           <p className="subheading text-secondary">
-            "Join us on TikTok for exclusive brand releases, unboxings, reviews,
-            and more!"
+            &quot;Join us on TikTok for exclusive brand releases, unboxings, reviews,
+            and more!&quot;
           </p>
         </div>
         <Swiper

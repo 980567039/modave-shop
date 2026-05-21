@@ -1,0 +1,16 @@
+export { default as About } from "@/app/newSite-components/otherPages/About";
+export { default as Checkout } from "@/app/newSite-components/otherPages/Checkout";
+export { default as Contact2 } from "@/app/newSite-components/otherPages/Contact2";
+export { default as Faqs } from "@/app/newSite-components/otherPages/Faqs";
+export { default as ForgotPass } from "@/app/newSite-components/otherPages/ForgotPass";
+export { default as Login } from "@/app/newSite-components/otherPages/Login";
+export { default as OrderTrac } from "@/app/newSite-components/otherPages/OrderTrac";
+export { default as ProductCompare } from "@/app/newSite-components/otherPages/ProductCompare";
+export { default as RecentProducts } from "@/app/newSite-components/otherPages/RecentProducts";
+export { default as Register } from "@/app/newSite-components/otherPages/Register";
+export { default as ShopCart } from "@/app/newSite-components/otherPages/ShopCart";
+export { default as StoreLocations1 } from "@/app/newSite-components/otherPages/StoreLocations1";
+export { default as Team } from "@/app/newSite-components/otherPages/Team";
+export { default as Terms } from "@/app/newSite-components/otherPages/Terms";
+export { default as Testimonials } from "@/app/newSite-components/otherPages/Testimonials";
+export { default as Testimonials2 } from "@/app/newSite-components/otherPages/Testimonials2";

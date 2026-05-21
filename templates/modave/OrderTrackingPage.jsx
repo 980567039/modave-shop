@@ -1,8 +1,7 @@
-﻿import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import Login from "@/app/newSite-components/otherPages/Login";
-import OrderTrac from "@/app/newSite-components/otherPages/OrderTrac";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { OrderTrac } from "@/templates/modave/components/other-pages";
 import Link from "next/link";
 import React from "react";
 

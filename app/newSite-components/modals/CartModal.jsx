@@ -3,15 +3,31 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useContextElement } from "@/app/newSite-context/Context";
+import { useTranslations } from "next-intl";
+
+const FALLBACK_IMAGE = "/newSite-images/products/womens/women-19.jpg";
+
+const getCartItemImage = (product) =>
+  product?.image ||
+  product?.mainImage ||
+  product?.imgSrc ||
+  product?.defaultImage?.url ||
+  FALLBACK_IMAGE;
+
+const getCartItemKey = (product, index) =>
+  product?.randomKey ||
+  `${product?.productId || product?._id || product?.id || "cart-item"}-${product?.size || ""}-${product?.color || ""}-${index}`;
+
 export default function CartModal() {
+  const t = useTranslations("cart");
   const {
     cartProducts,
     setCartProducts,
     totalPrice,
   } = useContextElement();
 
-  const removeItem = (id) => {
-    setCartProducts((pre) => [...pre.filter((elm) => elm.id != id)]);
+  const removeItem = (removeIndex) => {
+    setCartProducts((pre) => pre.filter((_, index) => index !== removeIndex));
   };
   const [currentOpenPopup, setCurrentOpenPopup] = useState("");
 
@@ -21,7 +37,7 @@ export default function CartModal() {
         <div className="modal-content">
           <div className="d-flex flex-column flex-grow-1 h-100">
             <div className="header">
-              <h5 className="title">Shopping Cart</h5>
+              <h5 className="title">{t("shoppingCart")}</h5>
               <span
                 className="icon-close icon-close-popup"
                 data-bs-dismiss="modal"
@@ -39,7 +55,7 @@ export default function CartModal() {
                   </div>
                 </div>
                 <div className="text-caption-1">
-                  Congratulations! You&apos;ve got free shipping!
+                  {t("freeShipping")}
                 </div>
               </div>
               <div className="tf-mini-cart-wrap">
@@ -49,15 +65,15 @@ export default function CartModal() {
                       <div className="tf-mini-cart-items">
                         {cartProducts.map((product, i) => (
                           <div
-                            key={i}
+                            key={getCartItemKey(product, i)}
                             className="tf-mini-cart-item file-delete"
                           >
                             <div className="tf-mini-cart-image">
                               
                               <Image
                                 className="lazyload"
-                                alt=""
-                                src={product?.defaultImage?.url}
+                                alt={product?.title || "cart item"}
+                                src={getCartItemImage(product)}
                                 width={600}
                                 height={800}
                               />
@@ -74,9 +90,9 @@ export default function CartModal() {
                                 </div>
                                 <div
                                   className="text-button tf-btn-remove remove"
-                                  onClick={() => removeItem(product.id)}
+                                  onClick={() => removeItem(i)}
                                 >
-                                  Remove
+                                  {t("remove")}
                                 </div>
                               </div>
                               <div className="d-flex align-items-center justify-content-between flex-wrap gap-12">
@@ -94,10 +110,9 @@ export default function CartModal() {
                       </div>
                     ) : (
                       <div className="p-4">
-                        Your Cart is empty. Start adding favorite products to
-                        cart!{" "}
+                        {t("empty")}{" "}
                         <Link className="btn-line" href="/shop-default-grid">
-                          Explore Products
+                          {t("exploreProducts")}
                         </Link>
                       </div>
                     )}
@@ -253,7 +268,7 @@ export default function CartModal() {
                         href={`/shopping-cart`}
                         className="tf-btn w-100 btn-fill radius-4"
                       >
-                        <span className="text">Check Out</span>
+                        <span className="text">{t("checkout")}</span>
                       </Link>
                     </div>
                     <div className="text-center">

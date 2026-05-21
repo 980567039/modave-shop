@@ -1,0 +1,12 @@
+export { default as Breadcumb } from "@/app/newSite-components/productDetails/Breadcumb";
+export { default as ColorSelect } from "@/app/newSite-components/productDetails/ColorSelect";
+export { default as ColorSelect9 } from "@/app/newSite-components/productDetails/ColorSelect9";
+export { default as Descriptions1 } from "@/app/newSite-components/productDetails/descriptions/Descriptions1";
+export { default as Details1 } from "@/app/newSite-components/productDetails/details/Details1";
+export { default as QuantitySelect } from "@/app/newSite-components/productDetails/QuantitySelect";
+export { default as RelatedProducts } from "@/app/newSite-components/productDetails/RelatedProducts";
+export { default as SizeSelect } from "@/app/newSite-components/productDetails/SizeSelect";
+export { default as Slider1 } from "@/app/newSite-components/productDetails/sliders/Slider1";
+export { default as Slider3 } from "@/app/newSite-components/productDetails/sliders/Slider3";
+export { default as Slider4 } from "@/app/newSite-components/productDetails/sliders/Slider4";
+export { default as VariantPicker } from "@/app/newSite-components/productDetails/VarientSelect";

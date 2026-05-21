@@ -1,8 +1,7 @@
-import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import RecentProducts from "@/app/newSite-components/otherPages/RecentProducts";
-import ShopCart from "@/app/newSite-components/otherPages/ShopCart";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { RecentProducts, ShopCart } from "@/templates/modave/components/other-pages";
 import Link from "next/link";
 
 export default function ModaveCartPage() {

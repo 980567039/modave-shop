@@ -5,6 +5,10 @@ import SessionProvider from './components/sessionProvider';
 import { AuthUserProvider } from "./contexts/authUserProvider";
 import { getServerSession } from "next-auth";
 import { Toaster } from "@/components/ui/sonner";
+import { NextIntlClientProvider } from "next-intl";
+import { cookies } from "next/headers";
+import enMessages from "@/messages/en.json";
+import zhMessages from "@/messages/zh.json";
 
 const headingFontExtraBold = localFont({
   src: '../public/fonts/Syne-ExtraBold.ttf',
@@ -33,8 +37,21 @@ export const metadata = {
   description: "All Your Clothing Needs",
 };
 
+const messagesByLocale = {
+  en: enMessages,
+  zh: zhMessages,
+};
+
+const supportedLocales = Object.keys(messagesByLocale);
+const defaultLocale = "en";
+
 export default async function RootLayout({ children }) {
   const session = await getServerSession();
+  const cookieStore = await cookies();
+  const requestedLocale = cookieStore.get("NEXT_LOCALE")?.value;
+  const locale = supportedLocales.includes(requestedLocale)
+    ? requestedLocale
+    : defaultLocale;
   const bodyClassName = [
     useGoogleFonts ? "" : localBodyFont.variable,
     useGoogleFonts ? "" : localBodyFont.className,
@@ -45,7 +62,7 @@ export default async function RootLayout({ children }) {
   ].filter(Boolean).join(" ");
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       {useGoogleFonts && (
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -65,8 +82,10 @@ export default async function RootLayout({ children }) {
       >
         <SessionProvider session={session}>
           <AuthUserProvider>
-            {children}
-            <Toaster />
+            <NextIntlClientProvider locale={locale} messages={messagesByLocale[locale]}>
+              {children}
+              <Toaster />
+            </NextIntlClientProvider>
           </AuthUserProvider>
         </SessionProvider>
       </body>

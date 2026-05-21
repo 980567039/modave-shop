@@ -4,6 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import CountdownTimer from "../common/Countdown";
 import { useContextElement } from "@/app/newSite-context/Context";
+
+const FALLBACK_IMAGE = "/newSite-images/products/womens/women-19.jpg";
+
+function normalizeImageSrc(src) {
+  if (typeof src !== "string" || !src.trim()) {
+    return FALLBACK_IMAGE;
+  }
+
+  const trimmedSrc = src.trim();
+  return /^https?:\/\//i.test(trimmedSrc) || trimmedSrc.startsWith("/")
+    ? trimmedSrc
+    : `/${trimmedSrc}`;
+}
+
+function getProductImage(product) {
+  return normalizeImageSrc(
+    product?.imgSrc ||
+    product?.image ||
+    product?.mainImage ||
+    product?.defaultImage?.url ||
+    product?.imgHover ||
+    FALLBACK_IMAGE
+  );
+}
+
+function getProductHoverImage(product) {
+  return normalizeImageSrc(product?.imgHover || product?.imageGallery?.[0]?.url || getProductImage(product));
+}
+
 export default function ProductCard1({
   product,
   gridClass = "",
@@ -12,12 +41,7 @@ export default function ProductCard1({
   radiusClass = "",
 }) {
   // console.log(product._id, '11111111111111111111')
-  const [currentImage, setCurrentImage] = useState(
-    product.defaultImage?.url || 
-    product.imgSrc || 
-    product.image || 
-    product.mainImage
-  );
+  const [currentImage, setCurrentImage] = useState(getProductImage(product));
 
   const {
     setQuickAddItem,
@@ -31,13 +55,10 @@ export default function ProductCard1({
   } = useContextElement();
 
   useEffect(() => {
-    setCurrentImage(
-      product.defaultImage?.url || 
-      product.imgSrc || 
-      product.image || 
-      product.mainImage
-    );
+    setCurrentImage(getProductImage(product));
   }, [product]);
+
+  const productTitle = product.title || product.name || "Product";
 
   return (
     <div
@@ -52,15 +73,15 @@ export default function ProductCard1({
           <Image
             className="lazyload img-product"
             src={currentImage}
-            alt={product.title}
+            alt={productTitle}
             width={600}
             height={800}
           />
 
           <Image
             className="lazyload img-hover"
-            src={product?.imageGallery && product?.imageGallery[0]?.url || product.imgHover}
-            alt={product.title}
+            src={getProductHoverImage(product)}
+            alt={productTitle}
             width={600}
             height={800}
           />
@@ -246,7 +267,6 @@ export default function ProductCard1({
                 const attributes = product.attributes?.[0]?.attributes
                 const defaultColor = attributes.color.value || "";
                 const defaultSize = attributes.size.value || "";
-                console.log(product, defaultColor, defaultSize)
                 addProductToCart({
                   ...product,
                   selectedColor: defaultColor,
@@ -276,14 +296,14 @@ export default function ProductCard1({
             {product.colors.map((color, index) => (
               <li
                 key={index}
-                className={`list-color-item color-swatch ${currentImage == color.imgSrc ? "active" : ""
+                className={`list-color-item color-swatch ${currentImage == normalizeImageSrc(color.imgSrc) ? "active" : ""
                   } ${color.bgColor == "bg-white" ? "line" : ""}`}
-                onMouseOver={() => setCurrentImage(color.imgSrc)}
+                onMouseOver={() => setCurrentImage(normalizeImageSrc(color.imgSrc))}
               >
                 <span className={`swatch-value ${color.bgColor}`} />
                 <Image
                   className="lazyload"
-                  src={color.imgSrc}
+                  src={normalizeImageSrc(color.imgSrc)}
                   alt="color variant"
                   width={600}
                   height={800}

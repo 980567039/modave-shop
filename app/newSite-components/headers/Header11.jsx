@@ -7,7 +7,10 @@ import Link from "next/link";
 import CartLength from "../common/CartLength";
 import ProductSearch from "./ProductSearch";
 import ProductSorting from "./ProductSorting";
+import { useTranslations } from "next-intl";
 export default function Header11() {
+  const t = useTranslations("account");
+
   return (
     <header id="header" className="header-default header-style-5 header-white">
       <div className="main-header bg-blue-2">
@@ -113,15 +116,15 @@ export default function Header11() {
                     <div className="dropdown-account dropdown-login">
                       <div className="sub-top">
                         <Link href={`/login`} className="tf-btn btn-reset">
-                          Login
+                          {t("login")}
                         </Link>
                         <p className="text-center text-secondary-2">
-                          Don’t have an account?{" "}
-                          <Link href={`/register`}>Register</Link>
+                          {t("noAccount")}{" "}
+                          <Link href={`/register`}>{t("register")}</Link>
                         </p>
                       </div>
                       <div className="sub-bot">
-                        <span className="body-text-">Support</span>
+                        <span className="body-text-">{t("support")}</span>
                       </div>
                     </div>
                   </li>

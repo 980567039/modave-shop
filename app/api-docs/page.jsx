@@ -54,11 +54,11 @@ export default function ApiDocsPage() {
     const groupRoutesByModule = (routesList) => {
         const grouped = {};
         routesList.forEach(route => {
-            const module = extractModuleName(route.path);
-            if (!grouped[module]) {
-                grouped[module] = [];
+            const moduleName = extractModuleName(route.path);
+            if (!grouped[moduleName]) {
+                grouped[moduleName] = [];
             }
-            grouped[module].push(route);
+            grouped[moduleName].push(route);
         });
         return grouped;
     };

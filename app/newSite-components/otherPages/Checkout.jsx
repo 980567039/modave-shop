@@ -28,6 +28,7 @@ import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
 import LocationSelector from '@/app/components/theme/checkout/LocationSelector';
 import moment from 'moment';
+import { useTranslations } from 'next-intl';
 
 import { useContextElement } from "@/app/newSite-context/Context";
 
@@ -87,6 +88,7 @@ const checkoutFormSchema = z.discriminatedUnion('fulfillmentType', [
 function CheckoutInner({
     siteKey
 }) {
+    const t = useTranslations("checkout");
     const { data: session, status } = useSession();
     const router = useRouter();
     const formRef = useRef(null);
@@ -115,6 +117,7 @@ function CheckoutInner({
     const { placeOrder, loading, orderedData } = usePlaceOrder();
 
     const { uniqueID, customer, storeData, cart, removeFromCart } = useContext(SiteContext);
+    const hasCartItems = Array.isArray(cart) && cart.length > 0;
 
 
     if (cart && cart.length === 0) {
@@ -231,13 +234,13 @@ function CheckoutInner({
                 } catch (error) {
                     if (error.message === 'Request timeout') {
                         // Show timeout specific message to user
-                        toast.error("Order request timed out. Please try again.");
+                        toast.error(t("orderTimeout"));
                     } else if (error.message.includes('HTTP error!')) {
                         // Show appropriate error based on status
-                        toast.error("Unable to place order. Please try again later.");
+                        toast.error(t("orderFailed"));
                     } else {
                         // Handle other errors
-                        toast.error("An unexpected error occurred.");
+                        toast.error(t("unexpectedError"));
                     }
                 }
             }
@@ -416,8 +419,8 @@ function CheckoutInner({
             if (orderedData?.payment?.type === 'cod' || orderedData?.payment?.type === 'bankTransfer') {
                 router.push(`/order-confirm?orderId=${orderedData?._id}&uniqueID=${uniqueID}`);
 
-                toast.success("Order placed successfully", {
-                    description: "You will receive a email with your order details"
+                toast.success(t("orderPlacedSuccessfully"), {
+                    description: t("orderDetailsEmail")
                 });
 
                 setIsLoading(false);
@@ -430,12 +433,12 @@ function CheckoutInner({
                     // 直接重定向到 PayPal/Stripe 提供的 URL
                     window.location.href = orderedData.redirectUrl;
                     
-                    toast.success("Order placed!", {
-                        description: "Redirecting to payment page..."
+                    toast.success(t("orderPlaced"), {
+                        description: t("redirectingPayment")
                     });
                 } else {
-                    toast.error("Payment initialization failed", {
-                        description: "Could not get payment redirect URL"
+                    toast.error(t("paymentInitializationFailed"), {
+                        description: t("paymentRedirectMissing")
                     });
                     setIsLoading(false);
                 }
@@ -457,15 +460,15 @@ function CheckoutInner({
                     formRef.current.submit();
                 }
 
-                toast.success("Order placed!", {
-                    description: "You will redirect to the payment page"
+                toast.success(t("orderPlaced"), {
+                    description: t("redirectToPayment")
                 });
 
                 setIsLoading(false)
             }
         }
 
-    }, [orderedData]);
+    }, [orderedData, router, t]);
 
 
     useEffect(() => {
@@ -523,7 +526,7 @@ function CheckoutInner({
             <div className='xl:px-[9.5vw] mx-auto my-5 min-h-[40vh]'>
                 {checkoutErrors !== "" && <Alert variant="destructive" className="mb-4">
                     <AlertCircle className="h-4 w-4" />
-                    <AlertTitle className="text-xs">Error</AlertTitle>
+                    <AlertTitle className="text-xs">{t("error")}</AlertTitle>
                     <AlertDescription className="text-xs">
                         {checkoutErrors}
                     </AlertDescription>
@@ -535,7 +538,7 @@ function CheckoutInner({
                             <div className='flex flex-col gap-3 mb-3 items-start border-b-2 border-black'>
                                 {/* <Button onClick={() => router.push('/cart')} variant="ghost" className="p-0 flex gap-2 items-center rounded-none uppercase text-xs tracking-wider font-headingFontMedium"><ChevronLeft className="w-4 h-4 " />Back to cart</Button> */}
                                 <div className='flex gap-2 items-center'>
-                                    <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>Billing details</h2>
+                                    <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>{t("billingDetails")}</h2>
                                 </div>
                             </div>
 
@@ -547,7 +550,7 @@ function CheckoutInner({
 
                                     render={({ field }) => (
                                         <FormItem className="w-full">
-                                            <FormLabel className="text-xs font-semibold">First Name<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("firstName")}<span className='text-red-500'>*</span></FormLabel>
                                             <FormControl>
                                                 <Input
                                                     className="rounded-3xl w-full"
@@ -564,7 +567,7 @@ function CheckoutInner({
                                     name="lastName"
                                     render={({ field }) => (
                                         <FormItem className="w-full">
-                                            <FormLabel className="text-xs font-semibold">Last Name</FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("lastName")}</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     className="rounded-3xl w-full"
@@ -588,7 +591,7 @@ function CheckoutInner({
                             {selectedFulfillmentType === 'delivery' &&
                                 <>
                                     <div className='flex gap-2 items-center border-b-2 border-black mb-3'>
-                                        <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>Address</h2>
+                                        <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>{t("address")}</h2>
                                     </div>
 
 
@@ -599,11 +602,11 @@ function CheckoutInner({
 
                                             render={({ field }) => (
                                                 <FormItem className="w-full">
-                                                    <FormLabel className="text-xs font-semibold">Street address<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("streetAddress")}<span className='text-red-500'>*</span></FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="rounded-3xl w-full leading-2"
-                                                            placeholder="Street address"
+                                                            placeholder={t("streetAddress")}
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -616,11 +619,11 @@ function CheckoutInner({
                                             name="addressLine2"
                                             render={({ field }) => (
                                                 <FormItem className="w-full">
-                                                    <FormLabel className="text-xs font-semibold">Apartment, suite, unit, etc. (optional)</FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("addressLine2")}</FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="rounded-3xl w-full leading-2"
-                                                            placeholder="Apartment, suite, unit, etc."
+                                                            placeholder={t("addressLine2")}
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -636,11 +639,11 @@ function CheckoutInner({
 
                                             render={({ field }) => (
                                                 <FormItem className="w-full">
-                                                    <FormLabel className="text-xs font-semibold">Town City<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("townCity")}<span className='text-red-500'>*</span></FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="rounded-3xl w-full leading-2"
-                                                            placeholder="Town / City"
+                                                            placeholder={t("townCity")}
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -653,11 +656,11 @@ function CheckoutInner({
                                             name="postalCode"
                                             render={({ field }) => (
                                                 <FormItem className="w-full">
-                                                    <FormLabel className="text-xs font-semibold">Postal Code<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("postalCode")}<span className='text-red-500'>*</span></FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="rounded-3xl w-full leading-2"
-                                                            placeholder="Postal Code / Zip Code"
+                                                            placeholder={t("postalCode")}
                                                             inputMode="numeric"
                                                             {...field}
                                                             onChange={(e) => {
@@ -672,12 +675,12 @@ function CheckoutInner({
                                         />
                                     </div>
                                     <div className='flex items-center gap-2 mb-3'>
-                                        <div className='font-semibold flex items-center gap-2 text-sm'>Sri lanka - <p className='font-normal text-muted-foreground text-xs italic'>Currently, we only ship within Sri Lanka!</p></div>
+                                        <div className='font-semibold flex items-center gap-2 text-sm'>Sri Lanka - <p className='font-normal text-muted-foreground text-xs italic'>{t("shipWithinSriLanka")}</p></div>
                                     </div>
                                 </>}
 
                             <div className='flex gap-2 items-center border-b-2 border-black mb-3'>
-                                <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>Contact Information</h2>
+                                <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>{t("contactInformation")}</h2>
                             </div>
                             <div className='flex flex-col md:flex-row gap-5 w-[100%] flex-grow mb-5'>
                                 <FormField
@@ -686,18 +689,18 @@ function CheckoutInner({
 
                                     render={({ field }) => (
                                         <FormItem className="w-full">
-                                            <FormLabel className="text-xs font-semibold">Email address<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("email")}<span className='text-red-500'>*</span></FormLabel>
                                             <FormControl>
                                                 <Input
                                                     className="rounded-3xl w-full"
-                                                    placeholder="Email"
+                                                    placeholder={t("email")}
                                                     inputMode="email"
                                                     {...field}
                                                 />
                                             </FormControl>
                                             {isLoadingEmail && <div className='flex items-center gap-3'>
                                                 <LoaderCircle className='w-4 h-4 animate-spin' />
-                                                <p className='text-muted-foreground text-xs'>Checking Email....</p>
+                                                <p className='text-muted-foreground text-xs'>{t("checkingEmail")}</p>
                                             </div>}
                                             <FormMessage className="text-xs" />
                                         </FormItem>
@@ -708,11 +711,11 @@ function CheckoutInner({
                                     name="phone"
                                     render={({ field }) => (
                                         <FormItem className="w-full">
-                                            <FormLabel className="text-xs font-semibold">Phone<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("phone")}<span className='text-red-500'>*</span></FormLabel>
                                             <FormControl>
                                                 <Input
                                                     className="rounded-3xl w-full"
-                                                    placeholder="Phone"
+                                                    placeholder={t("phone")}
                                                     inputMode="numeric"
                                                     {...field}
                                                     onChange={(e) => {
@@ -735,7 +738,7 @@ function CheckoutInner({
                                             checked={isCreateAccount}
                                             onCheckedChange={() => setIsCreateAccount((prevState) => !prevState)}
                                         />
-                                        <Label htmlFor="create-new-account">Create new account</Label>
+                                        <Label htmlFor="create-new-account">{t("createAccount")}</Label>
                                     </div>
 
                                     {isCreateAccount && <div className='space-y-3 pt-3'>
@@ -744,7 +747,7 @@ function CheckoutInner({
                                             name="password"
                                             render={({ field }) => (
                                                 <FormItem className="w-full">
-                                                    <FormLabel className="text-xs font-semibold">Password<span className='text-red-500'>*</span></FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("password")}<span className='text-red-500'>*</span></FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="rounded-3xl w-full"
@@ -762,7 +765,7 @@ function CheckoutInner({
 
                             {selectedFulfillmentType === 'delivery' && <>
                                 <div className='flex gap-2 items-center border-b-2 border-black mb-3'>
-                                    <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>Ship to?</h2>
+                                    <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>{t("shipTo")}</h2>
                                 </div>
 
                                 <div className='flex flex-col md:flex-row gap-5 w-[100%] flex-grow mb-5'>
@@ -772,7 +775,7 @@ function CheckoutInner({
                                             setOpenShipAddressModal(false);
                                         }} className={`flex items-center px-5 py-4 gap-7 border-[1px] cursor-pointer rounded-full font-headingFontMedium uppercase text-sm ${!shipToDifferent ? 'text-black bg-black' : 'text-gray-500 hover:text-black hover:border-black transition ease-in-out'}`}>
                                             <Receipt className='w-6 h-6' />
-                                            Billing address
+                                            {t("billingAddress")}
                                         </div>
                                     </div>
                                     <div className='flex-1'>
@@ -780,7 +783,7 @@ function CheckoutInner({
                                             setShipToDifferent(true);
                                             setOpenShipAddressModal(true);
                                         }} className={`flex items-center border-[1px] px-5 py-4 gap-3 cursor-pointer rounded-full font-headingFontMedium uppercase text-sm ${shipToDifferent ? 'text-black bg-black' : 'text-gray-500 hover:text-black hover:border-black transition ease-in-out'}`}>
-                                            <Truck className='w-6 h-6' />Different address
+                                            <Truck className='w-6 h-6' />{t("differentAddress")}
                                         </div>
                                     </div>
                                 </div>
@@ -788,14 +791,14 @@ function CheckoutInner({
                                 {shipToDifferent && shippingAddress && Object.keys(shippingAddress).length !== 0 && <div className='relative p-5 border-[1px] mb-5 rounded-2xl'>
 
                                     <div>
-                                        <h3 className='uppercase text-sm text-muted-foreground font-headingFontMedium mb-2'>Address</h3>
+                                        <h3 className='uppercase text-sm text-muted-foreground font-headingFontMedium mb-2'>{t("addressHeading")}</h3>
                                         <address className='not-italic mb-3 text-sm'>
                                             {shippingAddress.firstName} {shippingAddress?.lastName}<br />
                                             {shippingAddress.streetAddress}, {shippingAddress?.addressLine2}<br />
                                             {shippingAddress.townCity}, {shippingAddress?.postalCode ? `Postal code: ${shippingAddress.postalCode}` : ''}<br />
                                         </address>
 
-                                        <h3 className='uppercase text-sm text-muted-foreground font-headingFontMedium mb-2'>Contact</h3>
+                                        <h3 className='uppercase text-sm text-muted-foreground font-headingFontMedium mb-2'>{t("contactHeading")}</h3>
                                         <div className='flex flex-col text-sm'>
                                             <div>Email: {shippingAddress.email}</div>
                                             {shippingAddress?.phone && <div>Phone: {shippingAddress.phone}</div>}
@@ -813,11 +816,11 @@ function CheckoutInner({
                                 name="orderNote"
                                 render={({ field }) => (
                                     <FormItem className="w-full">
-                                        <FormLabel className="text-xs font-semibold">Order note(optional)</FormLabel>
+                                            <FormLabel className="text-xs font-semibold">{t("orderNote")}</FormLabel>
                                         <FormControl>
                                             <Textarea
                                                 className="rounded-2xl w-full"
-                                                placeholder="Order note"
+                                            placeholder={t("orderNote")}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -827,50 +830,64 @@ function CheckoutInner({
                             />
 
                         </div>
-                        <div className='xl:w-5/12 rounded-3xl text-black'>
+                        <div className='xl:w-5/12 rounded-3xl border border-black/10 bg-[#f7f5f0] text-black shadow-sm'>
 
                             <div className='p-6 xl:p-10'>
                                 {outOfStock && outOfStock?.showMessage && <Alert variant="destructive" className="mb-3 rounded-none text-xs">
                                     <AlertCircle className="h-4 w-4" />
-                                    <AlertTitle>Insufficient stock for some items</AlertTitle>
+                                    <AlertTitle>{t("insufficientStockTitle")}</AlertTitle>
                                     <AlertDescription className="text-xs">
-                                        We&apos;re sorry, but some items in your cart are currently out of stock or have insufficient quantities available. Please adjust your order accordingly.
+                                        {t("insufficientStockDescription")}
                                     </AlertDescription>
                                 </Alert>}
 
-                                {cart?.some((d) => (d.salePrice !== null && d.salePrice !== 0)) && <div className='bg-white/20 border-[1px] border-white/20 text-red-300 p-3 mb-4 rounded-3xl text-xs'>
-                                    <b>Note</b>: Offers are not eligible if an already discounted item or a gift card is in your cart
+                                {cart?.some((d) => (d.salePrice !== null && d.salePrice !== 0)) && <div className='bg-red-50 border-[1px] border-red-100 text-red-600 p-3 mb-4 rounded-3xl text-xs'>
+                                    <b>{t("note")}</b>: {t("saleNote")}
                                 </div>}
-                                <CartSummery outOfStockItems={outOfStock} totalShippingCost={(d) => setTotalShippingCost(d)} />
-                            </div>
-
-                            {/* payment options */}
-                            <PaymentOptions selectedPayment={selectedPayment} isPaymentSelected={isPaymentSelected} setSelectedPayment={(d) => setSelectedPayment(d)} />
-
-
-                            <div className='mb-5 px-6 xl:px-10 xl:mb-10'>
-                                <div className='text-xs text-black/75 mb-5 text-center'>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <Link href="/help/privacy-policy" className='underline hover:text-black'>privacy policy</Link>.</div>
-                                {/* <ReCAPTCHA
-                                    sitekey={siteKey}
-                                    onChange={handleRecaptchaChange}
-                                /> */}
-
-                                {errors && Object.keys(errors).length !== 0 && (
-                                    <div className='text-xs text-red-500 text-center mb-3 capitalize'>
-                                        Please review this field in the form: {Object.keys(errors).join(', ')}
+                                {hasCartItems ? (
+                                    <CartSummery tone="light" outOfStockItems={outOfStock} totalShippingCost={(d) => setTotalShippingCost(d)} />
+                                ) : (
+                                    <div className="rounded-3xl border border-black/10 bg-white p-6 text-center">
+                                        <h3 className="font-headingFontMedium text-sm uppercase tracking-wider text-black">{t("emptyCartTitle")}</h3>
+                                        <p className="mt-2 text-xs text-black/60">{t("emptyCartDescription")}</p>
+                                        <Link href="/shop-default-grid" className="mt-4 inline-flex rounded-full border border-black bg-black px-5 py-3 text-xs font-semibold uppercase text-white transition hover:bg-white hover:text-black">
+                                            {t("continueShopping")}
+                                        </Link>
                                     </div>
                                 )}
-
-                                <Button
-                                    onClick={checkoutSubmit(onSubmit)}
-                                    className="w-max mx-auto rounded-full bg-black text-white font-headingFontMedium uppercase text-white flex gap-2 items-center justify-center border-[1px] border-transparent transition-all ease-in-out hover:bg-black hover:text-black hover:border-white"
-                                    disabled={loading || isLoading || isDisabledPlaceOrder || storeData?.general?.disabledPlaceOder}
-                                >
-                                    {(loading || isLoading) && <LoaderCircle className='w-4 h-4 animate-spin' />}
-                                    {storeData?.general?.disabledPlaceOder ? "Ordering disabled" : "Place an order"}
-                                    <ChevronRight size={15} />
-                                </Button>
                             </div>
+
+                            {hasCartItems && (
+                                <>
+                                    {/* payment options */}
+                                    <PaymentOptions tone="light" selectedPayment={selectedPayment} isPaymentSelected={isPaymentSelected} setSelectedPayment={(d) => setSelectedPayment(d)} />
+
+
+                                    <div className='mb-5 px-6 xl:px-10 xl:mb-10'>
+                                        <div className='text-xs text-black/60 mb-5 text-center'>{t("privacyNotice")} <Link href="/help/privacy-policy" className='underline hover:text-black'>{t("privacyPolicy")}</Link>.</div>
+                                        {/* <ReCAPTCHA
+                                            sitekey={siteKey}
+                                            onChange={handleRecaptchaChange}
+                                        /> */}
+
+                                        {errors && Object.keys(errors).length !== 0 && (
+                                            <div className='text-xs text-red-500 text-center mb-3 capitalize'>
+                                                {t("reviewFields")} {Object.keys(errors).join(', ')}
+                                            </div>
+                                        )}
+
+                                        <Button
+                                            onClick={checkoutSubmit(onSubmit)}
+                                            className="w-max mx-auto rounded-full bg-black text-white font-headingFontMedium uppercase flex gap-2 items-center justify-center border-[1px] border-black transition-all ease-in-out hover:bg-white hover:text-black"
+                                            disabled={loading || isLoading || isDisabledPlaceOrder || storeData?.general?.disabledPlaceOder}
+                                        >
+                                            {(loading || isLoading) && <LoaderCircle className='w-4 h-4 animate-spin' />}
+                                            {storeData?.general?.disabledPlaceOder ? t("orderingDisabled") : t("placeOrder")}
+                                            <ChevronRight size={15} />
+                                        </Button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </Form>
@@ -881,8 +898,8 @@ function CheckoutInner({
                     <AlertDialogHeader>
                         <AlertDialogTitle>
                             <div className='flex gap-2 flex-col items-start justify-start border-b-2 border-black'>
-                                <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>Ship To Different Address</h2>
-                                <p className='text-xs text-muted-foreground font-normal mb-3'>Fill the shipping address to continue</p>
+                                <h2 className='text-lg font-semibold font-headingFontMedium uppercase tracking-wider'>{t("shipDifferentTitle")}</h2>
+                                <p className='text-xs text-muted-foreground font-normal mb-3'>{t("shipDifferentDescription")}</p>
                             </div>
                         </AlertDialogTitle>
                     </AlertDialogHeader>
@@ -902,14 +919,14 @@ function CheckoutInner({
                     borderRadius: 30
                 }}>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Confirmation Required!</AlertDialogTitle>
+                        <AlertDialogTitle>{t("confirmationRequired")}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Some items in your cart are out of stock. Would you like to proceed by removing them?
+                            {t("removeOutOfStockPrompt")}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel className="rounded-3xl" onClick={() => setShowOutOfStockItemsAlert(false)}>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={confirmRemoveItems} className="rounded-xl" disabled={confirmLoading}>{confirmLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Continue</AlertDialogAction>
+                        <AlertDialogCancel className="rounded-3xl" onClick={() => setShowOutOfStockItemsAlert(false)}>{t("cancel")}</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmRemoveItems} className="rounded-xl" disabled={confirmLoading}>{confirmLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{t("continue")}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -921,6 +938,7 @@ function CheckoutInner({
 }
 
 export default function Checkout() {
+    const t = useTranslations("checkout");
     const { cartProducts, setCartProducts } = useContextElement();
 
     const [uniqueID, setUniqueID] = useState(null);
@@ -956,6 +974,13 @@ export default function Checkout() {
     };
 
     const getUserIPAddress = async () => {
+        if (
+            typeof window !== 'undefined' &&
+            ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
+        ) {
+            return null;
+        }
+
         try {
             const response = await fetch('https://api64.ipify.org?format=json');
             const data = await response.json();
@@ -1039,7 +1064,7 @@ export default function Checkout() {
                 const { data } = await res.json();
                 setCartProducts(data?.cart); // Update newSite context
 
-                toast.success("Cart is updated");
+                toast.success(t("cartUpdated"));
 
             } else {
                 console.log("Failed to save cart data:", res.statusText);
@@ -1095,7 +1120,7 @@ export default function Checkout() {
                 const { data } = await res.json();
                 setCartProducts(data?.cart); // Update newSite context
 
-                toast.success("Cart is updated");
+                toast.success(t("cartUpdated"));
 
             } else {
                 console.log("Failed to save cart data:", res.statusText);
@@ -1117,7 +1142,7 @@ export default function Checkout() {
             item: product,
             status: false,
         })
-    }, [cart, ipAddress, browserInfo, uniqueID, setCartProducts]);
+    }, [cart, ipAddress, browserInfo, uniqueID, setCartProducts, t]);
 
     useEffect(() => {
         let isMounted = true;

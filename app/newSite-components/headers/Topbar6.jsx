@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import CurrencySelect from "../common/CurrencySelect";
 import LanguageSelect from "../common/LanguageSelect";
+import { useTranslations } from "next-intl";
 export default function Topbar6({ bgColor = "bg-blue-2" }) {
+  const t = useTranslations("nav");
+
   return (
     <div className={`tf-topbar ${bgColor}`}>
       <div className="container">
@@ -23,7 +28,7 @@ export default function Topbar6({ bgColor = "bg-blue-2" }) {
                 className="text-caption-1 text-white text-decoration-underline"
                 href={`/store-list`}
               >
-                Our Store
+                {t("ourStore")}
               </Link>
             </li>
           </ul>

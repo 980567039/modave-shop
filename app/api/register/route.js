@@ -1,7 +1,7 @@
 // 用户注册接口,创建新用户账号和用户元数据
 import User from "@/models/User";
 import UserMeta from "@/models/UserMeta";
-import bcrypt from "bcrypt";
+import { getBcrypt } from "@/lib/bcrypt";
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import ActivityLogs from "@/models/ActivityLogs";
@@ -27,6 +27,7 @@ export async function POST(request) {
                 return NextResponse.json({ message: 'Email address already exists, please use another one' }, { status: 500 })
             }
 
+            const bcrypt = await getBcrypt();
             const hashedPassword = await bcrypt.hash(formData.password, 10);
 
             const newUser = await User.create({
@@ -73,6 +74,7 @@ export async function POST(request) {
                     return NextResponse.json({ message: 'Email address already exists, please use another one' }, { status: 500 })
                 }
 
+                const bcrypt = await getBcrypt();
                 const hashedPassword = await bcrypt.hash(formData.password, 10);
 
                 const newUser = await User.create({

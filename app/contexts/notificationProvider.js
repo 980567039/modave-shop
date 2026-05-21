@@ -18,6 +18,10 @@ export const NotificationProvider = ({ children }) => {
     };
     requestPermission();
 
+    if (!database) {
+      return undefined;
+    }
+
     // Set up Firebase listener
     const notificationsRef = ref(database, 'notifications');
     

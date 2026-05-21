@@ -12,7 +12,7 @@ export default function BannerCountdown() {
               <div className="box-title">
                 <h3 className="wow fadeInUp">Limited-Time Deals On!</h3>
                 <p className="text-secondary wow fadeInUp">
-                  Up to 50% Off Selected Styles. Don't Miss Out.
+                  Up to 50% Off Selected Styles. Don&apos;t Miss Out.
                 </p>
               </div>
               <div className="btn-banner wow fadeInUp">

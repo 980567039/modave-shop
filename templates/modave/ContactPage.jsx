@@ -1,7 +1,7 @@
-﻿import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import Contact2 from "@/app/newSite-components/otherPages/Contact2";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { Contact2 } from "@/templates/modave/components/other-pages";
 import React from "react";
 
 export default function ContactPage() {

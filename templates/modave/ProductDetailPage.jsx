@@ -1,10 +1,7 @@
-import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import Breadcumb from "@/app/newSite-components/productDetails/Breadcumb";
-import Descriptions1 from "@/app/newSite-components/productDetails/descriptions/Descriptions1";
-import Details1 from "@/app/newSite-components/productDetails/details/Details1";
-import RelatedProducts from "@/app/newSite-components/productDetails/RelatedProducts";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { Breadcumb, Descriptions1, Details1, RelatedProducts } from "@/templates/modave/components/product-details";
 
 export default function ModaveProductDetailPage({ product }) {
   return (

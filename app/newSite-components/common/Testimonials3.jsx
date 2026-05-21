@@ -30,8 +30,8 @@ export default function Testimonials3({ testimonials = [] }) {
           }}
           dir="ltr"
         >
-          {testimonials.map((testimonial) => (
-            <SwiperSlide className="swiper-slide" key={testimonial.id}>
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide className="swiper-slide" key={testimonial.id ?? index}>
               <div className="testimonial-item style-2 style-3">
                 <div className="content-top">
                   <div className="list-star-default">

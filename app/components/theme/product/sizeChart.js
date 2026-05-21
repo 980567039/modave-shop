@@ -87,9 +87,9 @@ function ProfileForm({ sizeChart, isDesktop }) {
             {sizeChart && Object.keys(sizeChart).length !== 0 && <>
                 <img
                     src={isDesktop ? sizeChart?.image : sizeChart?.mobileImage}
+                    alt="Size chart"
                     width={1000}
                     height={800}
-                    unoptimized={true}
                 />
             </>}
         </div>

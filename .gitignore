@@ -7,3 +7,6 @@ db/
 !.env.example
 .DS_Store
 vercel.json
+playwright-report/
+test-results/
+.pnpm-store/

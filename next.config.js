@@ -1,8 +1,13 @@
-module.exports = {
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.js');
+
+const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true, // ❌ 构建时忽略 ESLint
     },
     images: {
+        unoptimized: process.env.NODE_ENV === 'development',
         remotePatterns: [
             {
                 protocol: 'https',
@@ -138,3 +143,5 @@ module.exports = {
         ];
     },
 };
+
+module.exports = withNextIntl(nextConfig);

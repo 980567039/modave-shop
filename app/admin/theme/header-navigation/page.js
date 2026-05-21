@@ -168,8 +168,6 @@ export default function NavigationMenuManager({ onChange, data }) {
     }, [store?.theme?.mainNavigation]);
 
     const handlerSave = async () => {
-        console.log(items);
-
         const payload = {
             mainNavigation: items,
             storeId: store?._id,

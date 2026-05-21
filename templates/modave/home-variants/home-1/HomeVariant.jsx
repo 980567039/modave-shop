@@ -1,13 +1,15 @@
-import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar from "@/app/newSite-components/headers/Topbar";
-import BannerCollection from "@/app/newSite-components/homes/home-1/BannerCollection";
-import BannerCountdown from "@/app/newSite-components/homes/home-1/BannerCountdown";
-import Collections from "@/app/newSite-components/homes/home-1/Collections";
-import Features from "@/app/newSite-components/common/Features";
-import Hero from "@/app/newSite-components/homes/home-1/Hero";
-import Products from "@/app/newSite-components/common/Products3";
-import ShopGram from "@/app/newSite-components/common/ShopGram";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar } from "@/templates/modave/components/headers";
+import { Features } from "@/templates/modave/components/common";
+import {
+  Home1BannerCollection as BannerCollection,
+  Home1BannerCountdown as BannerCountdown,
+  Home1Collections as Collections,
+  Home1Hero as Hero,
+} from "@/templates/modave/components/homes";
+import { Products3 as Products } from "@/templates/modave/components/common";
+import { ShopGram } from "@/templates/modave/components/common";
 
 const iconboxItems = [
   {

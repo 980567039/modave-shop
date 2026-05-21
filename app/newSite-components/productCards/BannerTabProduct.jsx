@@ -1,5 +1,7 @@
 ﻿"use client";
 import { useContextElement } from "@/app/newSite-context/Context";
+import Image from "next/image";
+import Link from "next/link";
 export default function BannerTabProduct({ product }) {
   const { setQuickViewItem } = useContextElement();
   return (

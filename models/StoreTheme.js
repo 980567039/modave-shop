@@ -16,6 +16,21 @@ const imageBlockSchema = new Schema({
     alt: { type: String, default: '' },
 }, flexibleSchemaOptions);
 
+const contentItemSchema = new Schema({
+    title: { type: String, default: '' },
+    subtitle: { type: String, default: '' },
+    description: { type: String, default: '' },
+    image: { type: String, default: '' },
+    imageSrc: { type: String, default: '' },
+    imgSrc: { type: String, default: '' },
+    mobileImage: { type: String, default: '' },
+    link: { type: String, default: '' },
+    url: { type: String, default: '' },
+    href: { type: String, default: '' },
+    buttonText: { type: String, default: '' },
+    alt: { type: String, default: '' },
+}, flexibleSchemaOptions);
+
 const sizeChartSchema = new Schema({
     uniqueId: { type: String, default: '' },
     title: { type: String, default: '' },
@@ -80,6 +95,14 @@ const instagramFeedSchema = new Schema({
     accessToken: { type: String, default: '' },
     userId: { type: String, default: '' },
     posts: { type: [Schema.Types.Mixed], default: [] },
+}, flexibleSchemaOptions);
+
+const homeContentSchema = new Schema({
+    marketingBanners: { type: [contentItemSchema], default: [] },
+    testimonials: { type: [contentItemSchema], default: [] },
+    brands: { type: [contentItemSchema], default: [] },
+    blogPosts: { type: [contentItemSchema], default: [] },
+    decorativeMedia: { type: [contentItemSchema], default: [] },
 }, flexibleSchemaOptions);
 
 const footerThemeSchema = new Schema({
@@ -157,6 +180,10 @@ const storeThemeSchema = new Schema({
     },
     instagramFeed: {
         type: instagramFeedSchema,
+        default: () => ({}),
+    },
+    homeContent: {
+        type: homeContentSchema,
         default: () => ({}),
     },
     footer: {

@@ -64,12 +64,7 @@ const modaveTemplate = {
   },
   homeVariants: {
     default: "home-1",
-    available: ["home-1", "fashion-main", "electronic", "home-baby"],
-    env: [
-      "NEXT_PUBLIC_MODAVE_HOME_VARIANT",
-      "NEXT_PUBLIC_HOME_VARIANT",
-      "MODAVE_HOME_VARIANT",
-    ],
+    available: ["home-1"],
   },
   themeBlocks: [
     "common",
@@ -85,6 +80,7 @@ const modaveTemplate = {
     "shopByCategories",
     "storeLocations",
     "instagramFeed",
+    "homeContent",
     "footer",
   ],
 };

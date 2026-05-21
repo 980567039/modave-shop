@@ -78,7 +78,6 @@ async function handleGet(req, res) {
                 select: '-ipAddress -ipAddressData -userSiteUniqueID'
             }
         );
- console.log('orders:', orders)
         // If no order found or email already sent, return early
         // 分支：
         // - 若订单不存在，返回 404；

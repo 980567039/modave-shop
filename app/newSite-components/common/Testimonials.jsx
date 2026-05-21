@@ -51,8 +51,8 @@ export default function Testimonials({ parentClass = "flat-spacing", testimonial
                 <div className="testimonial-item hover-img">
                   <div className="img-style">
                     <Image
-                      src={testimonial.imgSrc}
-                      alt={testimonial.alt}
+                      src={testimonial.imgSrc || testimonial.imageSrc || "/newSite-images/products/womens/women-19.jpg"}
+                      alt={testimonial.alt || testimonial.title || testimonial.product || "testimonial product"}
                       width={468}
                       height={624}
                     />
@@ -119,7 +119,7 @@ export default function Testimonials({ parentClass = "flat-spacing", testimonial
                       <div className="avatar avt-60 round">
                         <Image
                           alt="avt"
-                          src={testimonial.avatar}
+                          src={testimonial.avatar || testimonial.avatarSrc || "/newSite-images/avatar/user-1.jpg"}
                           width={90}
                           height={91}
                         />

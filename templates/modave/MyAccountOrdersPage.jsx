@@ -1,4 +1,4 @@
-import Orers from "@/app/newSite-components/my-account/Orers";
+import { Orers } from "@/templates/modave/components/account";
 import MyAccountShell from "@/templates/modave/MyAccountShell";
 
 export default function ModaveMyAccountOrdersPage() {

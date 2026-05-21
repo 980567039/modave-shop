@@ -23,8 +23,8 @@ export default function Features({ parentClass = "flat-spacing", iconboxItems = 
             el: ".spd2",
           }}
         >
-          {iconboxItems.map((item) => (
-            <SwiperSlide key={item.id}>
+          {iconboxItems.map((item, index) => (
+            <SwiperSlide key={item.id ?? item.title ?? index}>
               <div className="tf-icon-box">
                 <div className="icon-box">
                   <span className={`icon ${item.icon}`} />

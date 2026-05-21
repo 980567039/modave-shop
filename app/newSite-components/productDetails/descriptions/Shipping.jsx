@@ -5,7 +5,7 @@ export default function Shipping() {
     <>
       {" "}
       <div className="w-100">
-        <div className="text-btn-uppercase mb_12">We've got your back</div>
+        <div className="text-btn-uppercase mb_12">We&apos;ve got your back</div>
         <p className="mb_12">
           One delivery fee to most locations (check our Orders &amp; Delivery
           page)

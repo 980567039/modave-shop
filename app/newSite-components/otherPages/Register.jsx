@@ -218,7 +218,7 @@ export default function Register() {
             <h4 className="mb_8">Already have an account?</h4>
             <p className="text-secondary">
               Welcome back. Sign in to access your personalized experience,
-              saved preferences, and more. We're thrilled to have you with us
+              saved preferences, and more. We&apos;re thrilled to have you with us
               again!
             </p>
             <Link href={`/login`} className="tf-btn btn-fill">

@@ -295,7 +295,7 @@ export default function ProductDetails({
                                         />
                                     </FormControl>
                                     <FormDescription className="text-xs">
-                                        如果您想为每个变体添加价格，可以从"变体"选项卡中进行设置。这将是主要产品价格。
+                                        如果您想为每个变体添加价格，可以从&quot;变体&quot;选项卡中进行设置。这将是主要产品价格。
                                     </FormDescription>
                                     <FormMessage className="text-xs" />
                                 </FormItem>

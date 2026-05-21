@@ -20,6 +20,10 @@ export default function SalesMetricsPage() {
     const [salesMetrics, setSalesMetrics] = useState([]);
 
     useEffect(() => {
+        if (!database) {
+            return undefined;
+        }
+
         // Listen to data changes
         const dbRef = ref(database);
         const salesRef = child(dbRef, 'salesMetrics');
@@ -37,6 +41,11 @@ export default function SalesMetricsPage() {
     }, []);
 
     const handlerAddData = () => {
+        if (!database) {
+            toast.error("Firebase is not configured");
+            return;
+        }
+
         const dbRef = ref(database);
         const newMetricRef = push(child(dbRef, 'salesMetrics'));
         const newMetric = {

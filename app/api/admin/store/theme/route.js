@@ -1,6 +1,7 @@
 // 店铺主题设置
 import { authOptions } from "@/lib/authOptions";
 import connectDB from "@/lib/db";
+import { validateStoreThemePayload } from "@/lib/validation/storeTheme";
 import StoreTheme from "@/models/StoreTheme";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -17,6 +18,15 @@ async function handlePost(req, res) {
 
             const reqData = await req?.json();
             
+            const validationErrors = validateStoreThemePayload(reqData);
+
+            if (validationErrors.length > 0) {
+                return NextResponse.json(
+                    { message: "Validation failed", errors: validationErrors },
+                    { status: 422 }
+                );
+            }
+
             if (reqData && reqData.storeId) {
                 const findExisting = await StoreTheme.findOne({ storeId: reqData.storeId });
                 let res;

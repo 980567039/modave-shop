@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import CartLength from "../common/CartLength";
 import { signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function Header1({ fullWidth = false }) {
   const { data: session } = useSession();
+  const t = useTranslations("account");
   return (
     <header
       id="header"
@@ -110,19 +112,19 @@ export default function Header1({ fullWidth = false }) {
                           href="/my-account"
                           className="d-block mb-2 text-secondary-2"
                         >
-                          Account
+                          {t("account")}
                         </Link>
                         <Link
                           href="/my-account-orders"
                           className="d-block mb-2 text-secondary-2"
                         >
-                          Orders
+                          {t("orders")}
                         </Link>
                         <Link
                           href="/my-account-address"
                           className="d-block mb-2 text-secondary-2"
                         >
-                          Address
+                          {t("address")}
                         </Link>
                         <a
                           href="#"
@@ -132,24 +134,24 @@ export default function Header1({ fullWidth = false }) {
                             signOut();
                           }}
                         >
-                          Logout
+                          {t("logout")}
                         </a>
                       </div>
                     ) : (
                       <>
                         <Link href={`/login`} className="tf-btn btn-reset">
-                          Login
+                          {t("login")}
                         </Link>
                         <p className="text-center text-secondary-2">
-                          Don’t have an account?{" "}
-                          <Link href={`/register`}>Register</Link>
+                          {t("noAccount")}{" "}
+                          <Link href={`/register`}>{t("register")}</Link>
                         </p>
                       </>
                     )}
                   </div>
                   {!session && (
                     <div className="sub-bot">
-                      <span className="body-text-">Support</span>
+                      <span className="body-text-">{t("support")}</span>
                     </div>
                   )}
                 </div>

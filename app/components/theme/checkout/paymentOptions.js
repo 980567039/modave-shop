@@ -6,14 +6,17 @@ import { formatPrice, getCartTotal } from '@/lib/common';
 import { Banknote, Check, CirclePercent, Copy } from 'lucide-react';
 import Image from 'next/image'
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 
 export default function PaymentOptions({
     selectedPayment,
     isPaymentSelected,
     setSelectedPayment,
+    tone = "dark",
 }) {
     const { cart, storeData } = useContext(SiteContext);
+    const t = useTranslations("payment");
     const [canApplyKokoOffer, setCanApplyKokoOffer] = useState(false);
     const [minusKokoOfferAmount, setMinusKokoOfferAmount] = useState(0);
     const [finalTotal, setFinalTotal] = useState(0);
@@ -48,6 +51,25 @@ export default function PaymentOptions({
 
     const isGiftCardAvailable = cart?.some((d) => d.isGiftCard);
     const isHaveSalesItems = cart?.some((d) => (d.salePrice !== null && d.salePrice !== 0));
+    const isLight = tone === "light";
+    const optionClass = isLight
+        ? "flex gap-2 items-center text-black p-2 border-[1px] border-black/10 rounded-3xl bg-white"
+        : "flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black/10";
+    const activeOptionClass = isLight
+        ? "flex gap-2 items-center text-black p-2 border-[1px] border-black/10 rounded-3xl bg-white"
+        : "flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black";
+    const detailsClass = isLight
+        ? "bg-white border-[1px] border-black/10 rounded-3xl p-4 text-xs space-y-2 text-black"
+        : "bg-black backdrop-blur-sm border-[1px] border-white/15 rounded-3xl p-4 text-xs space-y-2";
+    const helperTextClass = isLight ? "text-black/60" : "text-white/65";
+    const helperLinkClass = isLight ? "underline text-black" : "underline text-white";
+    const connectorClass = isLight ? "bg-black/20" : "bg-black";
+    const switchClassName = isLight
+        ? "border-black/20 data-[state=checked]:bg-black data-[state=unchecked]:bg-black/25"
+        : "";
+    const switchThumbClassName = isLight
+        ? "bg-white data-[state=unchecked]:bg-white"
+        : "";
 
     const calculateTotalAndInstallments = useCallback(() => {
         if (!cart || cart.length === 0) return;
@@ -99,63 +121,69 @@ export default function PaymentOptions({
     return (
         <div className={`flex flex-col p-5 xl:p-10 gap-3 ${isPaymentSelected !== null && isPaymentSelected === false ? "border-2 border-red-500" : ""}`}>
             {!isGiftCardAvailable && (
-                <div className='flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black/10'>
+                <div className={optionClass}>
                     <div className="flex items-center space-x-2 font-headingFontMedium">
                         <CustomSwitch
                             id="cash-on-delivery"
+                            className={switchClassName}
+                            thumbClassName={switchThumbClassName}
                             checked={selectedPayment && selectedPayment?.type === "cod" && selectedPayment?.status}
                             onCheckedChange={() => setSelectedPayment(prev => ({
                                 status: prev.type === 'cod' ? !prev.status : true,
                                 type: 'cod'
                             }))}
                         />
-                        <Label htmlFor="cash-on-delivery" className="font-headingFontMedium text-xs uppercase">{storeData?.fulfillmentType === 'delivery' ? 'Cash on delivery' : 'Cash at pickup'}</Label>
+                        <Label htmlFor="cash-on-delivery" className="font-headingFontMedium text-xs uppercase">{storeData?.fulfillmentType === 'delivery' ? t("cashOnDelivery") : t("cashAtPickup")}</Label>
                     </div>
                 </div>
             )}
 
             {isGiftCardAvailable && storeData?.fulfillmentType !== 'delivery' && <>
-                <div className='flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black/10'>
+                <div className={optionClass}>
                     <div className="flex items-center space-x-2 font-headingFontMedium">
                         <CustomSwitch id="cash-on-delivery"
+                            className={switchClassName}
+                            thumbClassName={switchThumbClassName}
                             checked={selectedPayment && selectedPayment?.type === "cod" && selectedPayment?.status}
                             onCheckedChange={() => setSelectedPayment(prev => ({
                                 status: prev.type === 'cod' ? !prev.status : true,
                                 type: 'cod'
                             }))}
                         />
-                        <Label htmlFor="cash-on-delivery" className="font-headingFontMedium text-xs uppercase">Cash on delivery</Label>
+                        <Label htmlFor="cash-on-delivery" className="font-headingFontMedium text-xs uppercase">{t("cashOnDelivery")}</Label>
                     </div>
                 </div>
             </>}
 
             <div className='flex gap-2 flex-col'>
-                <div className='flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black/10'>
+                <div className={optionClass}>
                     <div className="flex items-center space-x-2">
                         <CustomSwitch id="bankTransfer"
+                            className={switchClassName}
+                            thumbClassName={switchThumbClassName}
                             checked={selectedPayment && selectedPayment?.type === "bankTransfer" && selectedPayment?.status}
                             onCheckedChange={() => setSelectedPayment(prev => ({
                                 status: prev.type === 'bankTransfer' ? !prev.status : true,
                                 type: 'bankTransfer'
                             }))}
                         />
-                        <Label htmlFor="bankTransfer" className="font-headingFontMedium text-xs uppercase">Bank Transfer</Label>
+                        <Label htmlFor="bankTransfer" className="font-headingFontMedium text-xs uppercase">{t("bankTransfer")}</Label>
                     </div>
                 </div>
 
 
                 {selectedPayment && selectedPayment?.type === "bankTransfer" && selectedPayment?.status && <div className='flex flex-col gap-3 relative'>
-                    <div className='w-[1px] h-[10px] bg-black absolute -top-[10px] left-5'></div>
-                    <div className='bg-black backdrop-blur-sm border-[1px] border-white/15 rounded-3xl p-4 text-xs space-y-2'>
+                    <div className={`w-[1px] h-[10px] ${connectorClass} absolute -top-[10px] left-5`}></div>
+                    <div className={detailsClass}>
                         <div className='flex items-center gap-2 font-headingFontMedium uppercase'>
                             <Banknote size={20} strokeWidth={1} />
-                            Bank Details
+                            {t("bankDetails")}
                         </div>
 
                         <div>
-                            <div>Account number : 056010021580</div>
-                            <div>Bank : Hatton National Bank</div>
-                            <div>Branch : Kiribathgoda</div>
+                            <div>{t("accountNumber")} : 056010021580</div>
+                            <div>{t("bank")} : Hatton National Bank</div>
+                            <div>{t("branch")} : Kiribathgoda</div>
                         </div>
 
                         <div className='flex justify-end'>
@@ -166,20 +194,20 @@ export default function PaymentOptions({
                                 {copied ? (
                                     <>
                                         <Check size={16} strokeWidth={1} />
-                                        Copied!
+                                        {t("copied")}
                                     </>
                                 ) : (
                                     <>
                                         <Copy size={16} strokeWidth={1} />
-                                        Copy Account Number
+                                        {t("copyAccountNumber")}
                                     </>
                                 )}
                             </button>
                         </div>
                     </div>
 
-                    <div className='flex items-center text-[11px] gap-3 text-white/65 justify-end'>
-                        <p>Make your payment directly into our bank account. Please use your Order Number as the payment reference. Your order will not be shipped until the funds have cleared in our account. Send us the payment slip/ receipt via WhatsApp : <Link href={'https://api.whatsapp.com/send/?phone=94718995566&text&type=phone_number&app_absent=0'} target='_blank' className='underline text-white'>+94 71 899 5566</Link></p>
+                    <div className={`flex items-center text-[11px] gap-3 ${helperTextClass} justify-end`}>
+                        <p>{t("bankTransferInstructions")} <Link href={'https://api.whatsapp.com/send/?phone=94718995566&text&type=phone_number&app_absent=0'} target='_blank' className={helperLinkClass}>+94 71 899 5566</Link></p>
                     </div>
                 </div>}
             </div>
@@ -254,9 +282,11 @@ export default function PaymentOptions({
             {/* Stripe 支付选项 */}
             {storeData?.payments?.stripe && (
                 <div className='flex gap-2 flex-col'>
-                    <div className='flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black'>
+                    <div className={activeOptionClass}>
                         <div className="flex items-center space-x-2">
                             <CustomSwitch id="stripe"
+                                className={switchClassName}
+                                thumbClassName={switchThumbClassName}
                                 checked={selectedPayment?.type === "stripe" && selectedPayment?.status}
                                 onCheckedChange={() => setSelectedPayment(prev => ({
                                     status: prev.type === 'stripe' ? !prev.status : true,
@@ -264,7 +294,7 @@ export default function PaymentOptions({
                                 }))}
                             />
                             <Label htmlFor="stripe" className="font-headingFontMedium text-xs uppercase flex items-center">
-                                Visa / Mastercard &nbsp;&nbsp;<Image unoptimized src="/images/stripe-logo.png" alt="stripe" width={60} height={40} />
+                                {t("card")} &nbsp;&nbsp;<Image unoptimized src="/images/stripe-logo.png" alt="stripe" width={60} height={40} />
                             </Label>
                         </div>
                     </div>
@@ -273,9 +303,11 @@ export default function PaymentOptions({
             {/* PayPal 支付选项 */}
             {storeData?.payments?.paypal && (
                 <div className='flex gap-2 flex-col'>
-                    <div className='flex gap-2 items-center text-white p-2 border-[1px] border-white/30 rounded-3xl bg-black'>
+                    <div className={activeOptionClass}>
                         <div className="flex items-center space-x-2">
                             <CustomSwitch id="paypal"
+                                className={switchClassName}
+                                thumbClassName={switchThumbClassName}
                                 checked={selectedPayment?.type === "paypal" && selectedPayment?.status}
                                 onCheckedChange={() => setSelectedPayment(prev => ({
                                     status: prev.type === 'paypal' ? !prev.status : true,
@@ -283,7 +315,7 @@ export default function PaymentOptions({
                                 }))}
                             />
                             <Label htmlFor="paypal" className="font-headingFontMedium text-xs uppercase flex items-center">
-                                PayPal &nbsp;&nbsp;<Image unoptimized src="/images/paypal-logo.svg" alt="paypal" width={60} height={40} />
+                                {t("paypal")} &nbsp;&nbsp;<Image unoptimized src="/images/paypal-logo.svg" alt="paypal" width={60} height={40} />
                             </Label>
                         </div>
                     </div>

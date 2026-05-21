@@ -15,7 +15,7 @@ export default function Products({
     <section className={parentClass}>
       <div className="container">
         <div className="heading-section text-center wow fadeInUp">
-          <h3>Today's Top Picks</h3>
+          <h3>Today&apos;s Top Picks</h3>
           <ul className="tab-product-v2 justify-content-sm-center">
             {tabItems.map((item) => (
               <li key={item} className="nav-tab-item">

@@ -748,7 +748,7 @@ export const slidesActivewear = [
 
 export const sliderDataChicHaven02 = [
   {
-    imgSrc: "/newSite-images/slider/slider-chicHaven-2.jpg",
+    imgSrc: "/newSite-images/slider/slider-chicHaven2.jpg",
     imgAlt: "fashion-slideshow",
     title: "Modern <br /> Classy",
     description: "Upgrade your wardrobe with our chic and sophisticated styles.",
@@ -774,7 +774,7 @@ export const heroDataModernRetreat = {
 export const slidesClassyCove = [
   {
     id: 1,
-    imgSrc: "/newSite-images/slider/slider-classyCove.jpg",
+    imgSrc: "/newSite-images/slider/slider-fashion-classyCove1.jpg",
     alt: "fashion-slideshow",
     subheading: "Summer 2024",
     title: "New Arrival <br /> Collection",

@@ -29,8 +29,6 @@ const ThemeFooterPage = () => {
   }, []);
 
   const handlerSave = useCallback(() => {
-    console.log(data);
-
     const payload = {
       footer: data,
       storeId: store?._id,

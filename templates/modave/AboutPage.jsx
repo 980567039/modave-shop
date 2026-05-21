@@ -1,15 +1,12 @@
-﻿import Brands from "@/app/newSite-components/common/Brands";
-import Features2 from "@/app/newSite-components/common/Features2";
-import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
+import { Brands } from "@/templates/modave/components/common";
+import { Features2 } from "@/templates/modave/components/common";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
 import Link from "next/link";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import About from "@/app/newSite-components/otherPages/About";
-import Team from "@/app/newSite-components/otherPages/Team";
-import Testimonials from "@/app/newSite-components/otherPages/Testimonials";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { About, Team, Testimonials } from "@/templates/modave/components/other-pages";
 import React from "react";
-import { brands } from "@/app/newSite-data/brands";
-import { iconboxItems } from "@/app/newSite-data/features";
+import { aboutPageContent } from "@/templates/modave/data/aboutPage";
 
 export default function AboutUsPage() {
   return (
@@ -48,9 +45,12 @@ export default function AboutUsPage() {
         </div>
       </div>
       <About />
-      <Features2 parentClass="flat-spacing line-bottom-container" iconboxItems={iconboxItems} />
+      <Features2
+        parentClass="flat-spacing line-bottom-container"
+        iconboxItems={aboutPageContent.featureItems}
+      />
       <Team />
-      <Brands parentClass="flat-spacing-5 bg-surface" brands={brands} />
+      <Brands parentClass="flat-spacing-5 bg-surface" brands={aboutPageContent.brands} />
       <Testimonials />
       <Footer1 />
     </>

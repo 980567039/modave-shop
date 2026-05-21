@@ -15,6 +15,7 @@ const navItems = [
     { href: "/admin/theme/latest-arrival", label: "首页最新上架" },
     { href: "/admin/theme/highlighted-main-category", label: "首页分类" },
     { href: "/admin/theme/trending", label: "首页热门趋势" },
+    { href: "/admin/theme/home-content", label: "首页内容区块" },
     // { href: "/admin/theme/best-selling", label: "畅销产品" },
 
     // { href: "/admin/theme/featured-collection", label: "精选系列" },

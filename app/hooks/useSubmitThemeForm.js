@@ -12,8 +12,11 @@ const useSubmitThemeForm = () => {
             const res = await apiReq(url, method, payload);
 
             if (!res.ok) {
+                const errorData = await res.json().catch(() => null);
+                const description = errorData?.errors?.[0]?.message || errorData?.message || "Please try again later";
+
                 toast.error("Something went wrong!", {
-                    description: "Please try again later"
+                    description
                 });
                 return;
             }

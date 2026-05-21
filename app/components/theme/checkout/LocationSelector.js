@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar'
 import { cn } from '@/lib/utils'
 import { format, addDays, startOfMonth, endOfMonth } from 'date-fns'
+import { useTranslations } from 'next-intl'
 
 export default function LocationSelector({
   selectedFulfillmentType,
@@ -15,6 +16,7 @@ export default function LocationSelector({
   onChangeSelect,
   control
 }) {
+  const t = useTranslations("checkout");
   const { themeData, setStoreData } = useContext(SiteContext);
   const [selectedButton, setSelectedButton] = useState('');
   const [pickUpLocation, setPickUpLocations] = useState([]);
@@ -76,7 +78,7 @@ export default function LocationSelector({
           <div className={`w-[35px] h-[35px] md:w-[46px] md:h-[46px] rounded-full flex items-center justify-center ${selectedButton === 'delivery' ? 'bg-white' : 'bg-gray-200'}`}>
             <Truck className={`w-6 h-6 ${selectedButton === 'delivery' ? 'text-black' : ''}`} strokeWidth={1} />
           </div>
-          Home Delivery
+          {t("homeDelivery")}
         </div>
         <div
           type="button"
@@ -86,7 +88,7 @@ export default function LocationSelector({
           <div className={`w-[35px] h-[35px] md:w-[46px] md:h-[46px] rounded-full flex items-center justify-center ${selectedButton === 'pickup' ? 'bg-white' : 'bg-gray-200'}`}>
             <Store className={`w-6 h-6 ${selectedButton === 'pickup' ? 'text-black' : ''}`} strokeWidth={1} />
           </div>
-          Store Pickup
+          {t("storePickup")}
         </div>
       </div>
 
@@ -141,7 +143,7 @@ export default function LocationSelector({
             name="pickupDate"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="text-xs font-semibold">Select a pickup date<span className='text-red-500'>*</span></FormLabel>
+                <FormLabel className="text-xs font-semibold">{t("selectPickupDate")}<span className='text-red-500'>*</span></FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -152,7 +154,7 @@ export default function LocationSelector({
                       )}
                     >
                       <CalendarIcon strokeWidth={1} />
-                      {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                      {field.value ? format(field.value, "PPP") : <span>{t("pickDate")}</span>}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="flex w-auto flex-col space-y-2 p-2 rounded-[20px]">
@@ -162,11 +164,11 @@ export default function LocationSelector({
                       }
                     >
                       <SelectTrigger className="rounded-[20px]">
-                        <SelectValue placeholder="Select" />
+                        <SelectValue placeholder={t("select")} />
                       </SelectTrigger>
                       <SelectContent position="popper" className="rounded-[20px]">
-                        <SelectItem value="3">In 3 days</SelectItem>
-                        <SelectItem value="7">In a week</SelectItem>
+                        <SelectItem value="3">{t("inThreeDays")}</SelectItem>
+                        <SelectItem value="7">{t("inAWeek")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <div className="rounded-[20px] border">

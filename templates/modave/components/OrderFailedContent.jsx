@@ -26,7 +26,7 @@ export default function OrderFailedContent() {
           throw new Error(resData.message);
         }
       } catch (error) {
-        console.log(error);
+        console.error("Failed to clear failed order state:", error);
       } finally {
         setIsLoading(false);
       }

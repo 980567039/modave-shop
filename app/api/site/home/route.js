@@ -63,10 +63,6 @@ export async function GET(req) {
     }
 
     const products = await getProducts(allProductIds);
-    for (const k of Object.keys(theme)) {
-      console.log(k, 'theme')
-    }
-    console.log(theme.hotSelling, 'themethemethemetheme')
     const responseData = {
       ...theme.toObject(),
       latestArrival: latestArrivalProductIds.length > 0 ? {

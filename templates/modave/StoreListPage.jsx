@@ -1,7 +1,7 @@
-﻿import Footer1 from "@/app/newSite-components/footers/Footer1";
-import Header1 from "@/app/newSite-components/headers/Header1";
-import Topbar6 from "@/app/newSite-components/headers/Topbar6";
-import StoreLocations1 from "@/app/newSite-components/otherPages/StoreLocations1";
+import { Footer1 } from "@/templates/modave/components/footers";
+import { Header1 } from "@/templates/modave/components/headers";
+import { Topbar6 } from "@/templates/modave/components/headers";
+import { StoreLocations1 } from "@/templates/modave/components/other-pages";
 import React from "react";
 import Link from "next/link";
 export default function StorelistPage() {

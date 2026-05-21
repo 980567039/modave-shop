@@ -19,6 +19,24 @@ const getProductId = (product) => {
     : product;
 };
 
+const getClientIpAddress = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return "";
+  }
+
+  try {
+    const response = await fetch("https://api64.ipify.org?format=json");
+    if (!response.ok) {
+      return "";
+    }
+
+    const data = await response.json();
+    return data?.ip || "";
+  } catch {
+    return "";
+  }
+};
+
 export default function Context({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([]);
@@ -41,13 +59,7 @@ export default function Context({ children }) {
       setUniqueID(storedID);
       setBrowserInfo(window.navigator.userAgent);
 
-      try {
-        const response = await fetch("https://api64.ipify.org?format=json");
-        const data = await response.json();
-        setIpAddress(data.ip);
-      } catch (error) {
-        console.error("Error fetching IP:", error);
-      }
+      setIpAddress(await getClientIpAddress());
     };
 
     initializeUser();

@@ -9,7 +9,7 @@ export default function Products4({ parentClass = "", products = [] }) {
     <section className={parentClass}>
       <div className="container">
         <div className="heading-section text-center wow fadeInUp">
-          <h3 className="heading">Today's Top Picks</h3>
+          <h3 className="heading">Today&apos;s Top Picks</h3>
           <p className="subheading text-secondary">
             Fresh styles just in! Elevate your look.
           </p>

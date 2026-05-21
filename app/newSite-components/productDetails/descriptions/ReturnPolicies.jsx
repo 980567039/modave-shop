@@ -6,7 +6,7 @@ export default function ReturnPolicies() {
       {" "}
       <div className="text-btn-uppercase mb_12">Return Policies</div>
       <p className="mb_12 text-secondary">
-        At Modave, we stand behind the quality of our products. If you're not
+        At Modave, we stand behind the quality of our products. If you&apos;re not
         completely satisfied with your purchase, we offer hassle-free returns
         within 30 days of delivery.
       </p>
@@ -38,7 +38,7 @@ export default function ReturnPolicies() {
         </li>
       </ul>
       <p className="text-secondary font-2">
-        For any questions or concerns regarding returns, don't hesitate to reach
+        For any questions or concerns regarding returns, don&apos;t hesitate to reach
         out to our dedicated customer service team. Your satisfaction is our
         priority.
       </p>
